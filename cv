@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jamal Attmani - Page personnelle</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      color: #003366;
+    }
+    a {
+      color: #0055aa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Jamal Attmani</h1>
+  <p>Bienvenue sur ma page personnelle.</p>
+
+  <h2>Contact</h2>
+  <p>Email : <a href="mailto:jamal.attmani@example.com">jamal.attmani@example.com</a></p>
+
+  <h2>Domaines d’intérêt</h2>
+  <ul>
+    <li>Mathématiques appliquées</li>
+    <li>Modélisation numérique</li>
+    <li>Analyse fonctionnelle</li>
+  </ul>
+
+  <h2>Liens utiles</h2>
+  <ul>
+    <li><a href="cv.pdf">Mon CV (PDF)</a></li>
+    <li><a href="https://scholar.google.com">Google Scholar</a></li>
+    <li><a href="https://www.linkedin.com/">LinkedIn</a></li>
+  </ul>
+
+</body>
+</html>
