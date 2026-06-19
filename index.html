@@ -37,8 +37,9 @@
 
     h3 {
       font-size: 1.1em;
-      color: #555;
-      margin-top: 1.5em;
+      color: #004080;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
     }
 
     a {
@@ -50,11 +51,50 @@
       text-decoration: underline;
     }
 
+    /* Structure en deux colonnes */
+    .columns-container {
+      margin-top: 1.5em;
+    }
+    
+    .columns-container::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .column {
+      float: left;
+      width: 48%;
+      box-sizing: border-box;
+    }
+
+    .column-right {
+      float: right;
+      width: 48%;
+      box-sizing: border-box;
+    }
+
+    p strong {
+      color: #555;
+      display: inline-block;
+      margin-top: 0.5em;
+    }
+
+    ul {
+      margin-top: 0.3em;
+      padding-left: 20px;
+    }
+
     @media (max-width: 600px) {
       img {
         float: none;
         display: block;
         margin: auto;
+      }
+      .column, .column-right {
+        float: none;
+        width: 100%;
+        margin-bottom: 2em;
       }
     }
   </style>
@@ -64,46 +104,49 @@
   <img src="photo_jamal.jpeg" alt="Photo de Jamal Attmani">
 
   <h1>Jamal ATTMANI</h1>
-  <p>Docteur et professeur agrégé de mathématiques, ce site présente mes activités d’enseignement, mes domaines de recherche ainsi que mes publications scientifiques récentes.</p>
+  <p>Docteur et professeur agrégé de mathématiques, ce site presents mes activités d’enseignement, mes domaines de recherche ainsi que mes publications scientifiques récentes.</p>
   
   <h2>Enseignement</h2>
-
-    <h3>Mathématiques CP1 - Semestre 1</h3>
   
-  <p><strong>Contrôles :</strong></p>
-  <ul>
-    <li><a href="controle1_analyse1.pdf" target="_blank">Contrôle 1</a></li>
-    <li><a href="controle2_analyse1.pdf" target="_blank">Contrôle 2</a></li>
-    <li><a href="rattrapage_analyse1.pdf" target="_blank">Contrôle de rattrapage (Rat)</a></li>
-  </ul>
+  <div class="columns-container">
+    
+    <div class="column">
+      <h3>Mathématiques CP1 - Semestre 1</h3>
+      
+      <p><strong>Contrôles :</strong></p>
+      <ul>
+        <li><a href="controle1_analyse1.pdf" target="_blank">Contrôle 1</a></li>
+        <li><a href="controle2_analyse1.pdf" target="_blank">Contrôle 2</a></li>
+        <li><a href="rattrapage_analyse1.pdf" target="_blank">Contrôle de rattrapage (Rat)</a></li>
+      </ul>
 
-  <p><strong>Travaux Dirigés (TDs) :</strong></p>
-  <ul>
-    <li><a href="td1_analyse1.pdf" target="_blank">TD 1 : Analyse I</a></li>
-    <li><a href="td2_analyse1.pdf" target="_blank">TD 2 : Analyse I</a></li>
-    <li><a href="td3_analyse1.pdf" target="_blank">TD 3 : Analyse I</a></li>
-  </ul>
+      <p><strong>Travaux Dirigés (TDs) :</strong></p>
+      <ul>
+        <li><a href="td1_analyse1.pdf" target="_blank">TD 1 : Analyse I</a></li>
+        <li><a href="td2_analyse1.pdf" target="_blank">TD 2 : Analyse I</a></li>
+        <li><a href="td3_analyse1.pdf" target="_blank">TD 3 : Analyse I</a></li>
+      </ul>
+    </div>
+    
+    <div class="column-right">
+      <h3>Mathématiques CP1 - Semestre 2</h3>
+      
+      <p><strong>Analyse II :</strong></p>
+      <ul>
+        <li><a href="td1_analyse2.pdf" target="_blank">TD 1 : Analyse II</a></li>
+        <li><a href="td2_analyse2.pdf" target="_blank">TD 2 : Analyse II</a></li>
+        <li><a href="td3_analyse2.pdf" target="_blank">TD 3 : Analyse II</a></li>
+      </ul>
 
-  
-  <h3>Mathématiques CP1 - Semestre 2</h3>
-  
-  <p><strong>Analyse II :</strong></p>
-  <ul>
-    <li><a href="td1_analyse2.pdf" target="_blank">TD 1 : Analyse II</a></li>
-    <li><a href="td2_analyse2.pdf" target="_blank">TD 2 : Analyse II</a></li>
-    <li><a href="td3_analyse2.pdf" target="_blank">TD 3 : Analyse II</a></li>
-    <li><a href="td4_analyse2.pdf" target="_blank">TD 3 : Analyse II</a></li>
-  </ul>
+      <p><strong>Algèbre linéaire :</strong></p>
+      <ul>
+        <li><a href="td1_algebre.pdf" target="_blank">TD 1 : Algèbre linéaire</a></li>
+        <li><a href="td2_algebre.pdf" target="_blank">TD 2 : Algèbre linéaire</a></li>
+        <li><a href="td3_algebre.pdf" target="_blank">TD 3 : Algèbre linéaire</a></li>
+      </ul>
+    </div>
 
-  <p><strong>Algèbre linéaire :</strong></p>
-  <ul>
-    <li><a href="td1_algebre.pdf" target="_blank">TD 1 : Algèbre linéaire</a></li>
-    <li><a href="td2_algebre.pdf" target="_blank">TD 2 : Algèbre linéaire</a></li>
-    <li><a href="td3_algebre.pdf" target="_blank">TD 3 : Algèbre linéaire</a></li>
-    <li><a href="td4_algebre.pdf" target="_blank">TD 3 : Algèbre linéaire</a></li>
-    <li><a href="td5_algebre.pdf" target="_blank">TD 3 : Algèbre linéaire</a></li>
-  </ul>
-  
+  </div>
   
   <h2>Publications</h2>
   <p>Consultez mon profil <a href="https://scholar.google.com/citations?user=7ha3FgkAAAAJ&hl=en&oi=ao" target="_blank">Google Scholar</a>.</p>
