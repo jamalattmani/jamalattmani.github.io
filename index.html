@@ -1,268 +1,429 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Jamal Attmani</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      max-width: 800px;
-      margin: auto;
-      padding: 40px 20px;
-      background-color: #fdfdfd;
-      color: #222;
-      line-height: 1.7;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jamal Attmani — Mathématiques Appliquées</title>
+<meta name="description" content="Jamal Attmani, Docteur en Mathématiques Appliquées et Informatique, Professeur Agrégé. Enseignement, recherche en EDP et traitement d'images, publications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f4f0;
+    --bg-soft:#eceee8;
+    --surface:#ffffff;
+    --ink:#1c2430;
+    --ink-soft:#5a6273;
+    --indigo:#28344a;
+    --teal:#2f7a6f;
+    --teal-deep:#23594f;
+    --teal-soft:#e3eeea;
+    --amber:#c8762a;
+    --amber-soft:#f6e6d4;
+    --amber-deep:#8a4a10;
+    --line:#dadcd4;
+    --line-strong:#c3c6bc;
+    --radius:14px;
+    --maxw:1080px;
+    --shadow:0 1px 2px rgba(28,36,48,.04), 0 8px 24px -12px rgba(28,36,48,.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16.5px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:var(--teal-deep);}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--indigo);line-height:1.15;margin:0;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+  }
+  .skip-link{
+    position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;
+  }
+  .skip-link:focus{left:12px;top:12px;}
+  :focus-visible{outline:2.5px solid var(--amber);outline-offset:2px;border-radius:4px;}
 
-    img {
-      float: left;
-      margin: 0 20px 20px 0;
-      width: 160px;
-      border-radius: 8px;
-    }
+  /* ---------- header / nav ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,244,240,.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;max-width:var(--maxw);margin:0 auto;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--indigo);
+  }
+  .brand-mark{
+    width:34px;height:34px;border-radius:9px;
+    background:var(--indigo);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:700;font-size:15px;flex-shrink:0;
+  }
+  .brand-name{font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
+  nav.primary ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;}
+  nav.primary a{
+    display:block;text-decoration:none;color:var(--ink-soft);
+    font-size:14.5px;font-weight:500;padding:8px 13px;border-radius:8px;
+    transition:color .15s, background .15s;
+  }
+  nav.primary a:hover{color:var(--teal-deep);background:var(--teal-soft);}
+  nav.primary a.active{color:var(--teal-deep);background:var(--teal-soft);}
+  .nav-toggle{
+    display:none;border:1px solid var(--line-strong);background:var(--surface);
+    border-radius:8px;width:40px;height:40px;cursor:pointer;
+    align-items:center;justify-content:center;
+  }
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{
+    content:"";display:block;width:18px;height:2px;background:var(--ink);position:relative;
+    transition:transform .2s;
+  }
+  .nav-toggle span::before{content:"";position:absolute;top:-6px;width:18px;height:2px;background:var(--ink);}
+  .nav-toggle span::after{content:"";position:absolute;top:6px;width:18px;height:2px;background:var(--ink);}
 
-    h1 {
-      font-size: 2em;
-      color: #333;
-      margin-bottom: 0.2em;
-    }
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);}
+  .hero-motif{
+    position:absolute;inset:0;width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
+    pointer-events:none;
+  }
+  .hero-motif svg{width:100%;height:140%;}
+  .hero-inner{
+    position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:48px;
+    align-items:center;padding:76px 0 64px;
+  }
+  .hero-text .eyebrow{margin-bottom:14px;}
+  .hero-text h1{font-size:clamp(2.5rem,5vw,3.6rem);font-weight:700;letter-spacing:-.01em;}
+  .hero-text .role{
+    font-family:'Inter',sans-serif;font-weight:600;color:var(--ink-soft);
+    font-size:1.05rem;margin-top:10px;
+  }
+  .hero-text p.lede{margin-top:20px;max-width:46ch;color:var(--ink-soft);font-size:1.02rem;}
+  .hero-stats{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;}
+  .hero-stats div{display:flex;flex-direction:column;}
+  .hero-stats strong{font-family:'Fraunces',serif;font-size:1.9rem;color:var(--indigo);font-weight:700;}
+  .hero-stats span{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
 
-    h2 {
-      margin-top: 2em;
-      font-size: 1.3em;
-      color: #444;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 5px;
-    }
+  .portrait-frame{position:relative;justify-self:end;width:100%;max-width:280px;}
+  .portrait-frame::before{
+    content:"";position:absolute;top:14px;left:14px;right:-14px;bottom:-14px;
+    border:1.5px solid var(--teal);border-radius:var(--radius);z-index:0;
+  }
+  .portrait-frame img{
+    position:relative;z-index:1;width:100%;aspect-ratio:4/5;object-fit:cover;
+    border-radius:var(--radius);box-shadow:var(--shadow);background:var(--bg-soft);
+  }
 
-    h3 {
-      font-size: 1.1em;
-      color: #004080;
-      margin-top: 1em;
-      margin-bottom: 0.5em;
-    }
+  /* ---------- sections ---------- */
+  section{padding:64px 0;}
+  section.alt{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:36px;max-width:62ch;}
+  .section-head .eyebrow{margin-bottom:10px;display:block;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.2rem);font-weight:600;}
+  .section-head p{color:var(--ink-soft);margin-top:10px;}
 
-    a {
-      color: #004080;
-      text-decoration: none;
-    }
+  /* ---------- enseignement ---------- */
+  .course-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .course-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 26px 22px;box-shadow:var(--shadow);
+  }
+  .course-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--teal-deep);margin:0 0 6px;
+  }
+  .course-card h3{font-size:1.3rem;font-weight:600;margin-bottom:14px;}
+  .course-group{margin-top:14px;}
+  .course-group h4{
+    font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.04em;color:var(--ink-soft);margin:0 0 8px;
+  }
+  .file-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+  .file-pill{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--teal-soft);color:var(--teal-deep);text-decoration:none;
+    font-size:13.5px;font-weight:500;padding:7px 12px 7px 9px;border-radius:999px;
+    border:1px solid transparent;transition:background .15s,border-color .15s;
+  }
+  .file-pill:hover{background:#d3e6e0;border-color:var(--teal);}
+  .file-pill .ic-doc{width:15px;height:15px;flex-shrink:0;}
+  .file-pill--off{
+    background:var(--bg-soft);color:var(--ink-soft);cursor:default;
+  }
+  .file-pill--off em{font-style:normal;font-size:11px;margin-left:2px;color:var(--ink-soft);opacity:.8;}
+  .ic-doc{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;}
 
-    a:hover {
-      text-decoration: underline;
-    }
+  /* ---------- recherche ---------- */
+  .domain-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px 28px;}
+  .domain-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;}
+  .domain-list li svg{flex-shrink:0;margin-top:2px;}
+  .domain-list li span{color:var(--ink);}
 
-    /* Structure en deux colonnes */
-    .columns-container {
-      margin-top: 1.5em;
-    }
-    
-    .columns-container::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
+  /* ---------- publications ---------- */
+  .pub-subhead{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-soft);margin:0 0 16px;padding-top:8px;border-top:1px solid var(--line);
+  }
+  .pub-subhead:first-of-type{border-top:none;padding-top:0;}
+  ul.pub-list{list-style:none;margin:0 0 40px;padding:0;display:flex;flex-direction:column;gap:0;}
+  li.pub{
+    padding:20px 0;border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:start;
+  }
+  li.pub:first-child{padding-top:0;}
+  li.pub:last-child{border-bottom:none;}
+  .pub-top{display:flex;flex-direction:column;align-items:flex-start;}
+  .pub-year{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--ink-soft);}
+  .badge{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+    padding:3px 8px;border-radius:6px;font-weight:500;
+  }
+  .badge--soumis{background:var(--amber-soft);color:var(--amber-deep);}
+  .badge--accept{background:var(--teal-soft);color:var(--teal-deep);}
+  .pub-authors{margin:0 0 4px;font-size:13.5px;color:var(--ink-soft);}
+  .me{color:var(--indigo);font-weight:700;}
+  .pub-title{
+    display:inline-flex;align-items:center;gap:6px;font-family:'Fraunces',serif;font-weight:600;
+    font-size:1.05rem;color:var(--indigo);text-decoration:none;line-height:1.35;
+  }
+  .pub-title:hover{color:var(--teal-deep);}
+  .pub-title .ic-out{width:13px;height:13px;flex-shrink:0;opacity:.55;}
+  .pub-title--plain{font-style:italic;color:var(--ink);font-weight:500;font-size:1.02rem;}
+  .pub-venue{margin:6px 0 0;font-size:13.5px;color:var(--ink-soft);}
+  .ic-out{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 
-    .column {
-      float: left;
-      width: 48%;
-      box-sizing: border-box;
-    }
+  /* ---------- agrégation ---------- */
+  .agreg-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;}
+  .agreg-link{
+    display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:16px 18px;text-decoration:none;box-shadow:var(--shadow);
+    transition:border-color .15s;
+  }
+  .agreg-link:hover{border-color:var(--teal);}
+  .agreg-domaine{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--teal-deep);background:var(--teal-soft);padding:5px 10px;border-radius:7px;flex-shrink:0;
+  }
+  .agreg-titre{color:var(--ink);font-size:15px;flex:1;}
+  .agreg-link .ic-out{width:15px;height:15px;color:var(--ink-soft);flex-shrink:0;}
 
-    .column-right {
-      float: right;
-      width: 48%;
-      box-sizing: border-box;
-    }
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .contact-card{
+    display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:18px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);
+    transition:border-color .15s,transform .15s;
+  }
+  .contact-card:hover{border-color:var(--teal);transform:translateY(-1px);}
+  .contact-card .ic{width:20px;height:20px;color:var(--teal-deep);flex-shrink:0;
+    fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  .contact-text{display:flex;flex-direction:column;}
+  .contact-text strong{font-size:15px;font-weight:600;}
+  .contact-text em{font-style:normal;font-size:12.5px;color:var(--ink-soft);}
 
-    p strong {
-      color: #555;
-      display: inline-block;
-      margin-top: 0.5em;
-    }
+  footer.site{padding:30px 0 40px;}
+  footer.site .wrap{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-size:13px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:24px;
+  }
+  footer.site .eyebrow{font-size:11px;}
 
-    ul {
-      margin-top: 0.3em;
-      padding-left: 20px;
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;padding:48px 0 40px;}
+    .portrait-frame{justify-self:start;max-width:200px;order:-1;}
+    .course-grid{grid-template-columns:1fr;}
+    .domain-list{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    nav.primary{
+      position:absolute;top:100%;left:0;right:0;background:var(--bg);
+      border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+      max-height:0;overflow:hidden;transition:max-height .25s ease;
     }
-
-    @media (max-width: 600px) {
-      img {
-        float: none;
-        display: block;
-        margin: auto;
-      }
-      .column, .column-right {
-        float: none;
-        width: 100%;
-        margin-bottom: 2em;
-      }
-    }
-  </style>
+    nav.primary.open{max-height:340px;}
+    nav.primary ul{flex-direction:column;padding:10px 28px 18px;gap:2px;}
+    nav.primary a{padding:11px 8px;}
+    .nav-toggle{display:flex;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
 </head>
 <body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
-  <img src="photo_jamal.jpeg" alt="Photo de Jamal Attmani">
-
-  <h1>Jamal ATTMANI</h1>
-  <p>Docteur en Mathématiques Appliquées et Informatique et Professeur Agrégé de Mathématiques, je présente sur ce site mes activités d’enseignement, mes axes de recherche ainsi que mes publications scientifiques récentes.</p>
-  
-  <h2>Enseignement</h2>
-  
-  <div class="columns-container">
-    
-    <div class="column">
-      <h3>Analyse 1 - 1er année du Cycle préparatoire - Semestre 1</h3>
-      <p><strong>Travaux Dirigés (TDs) :</strong></p>
+<header class="site">
+  <div class="nav-row">
+    <a class="brand" href="#accueil">
+      <span class="brand-mark">JA</span>
+      <span class="brand-name">Jamal Attmani</span>
+    </a>
+    <nav class="primary" id="primary-nav">
       <ul>
-        <li><a href="td1_analyse1.pdf" target="_blank">TD 1 : Analyse 1</a></li>
-        <li><a href="td2_analyse1.pdf" target="_blank">TD 2 : Analyse 1</a></li>
-        <li><a href="td3_analyse1.pdf" target="_blank">TD 3 : Analyse 1</a></li>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#enseignement">Enseignement</a></li>
+        <li><a href="#recherche">Recherche</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#agregation">Agrégation</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-      <p><strong>Contrôles:</strong></p>
-      <ul>
-        <li><a href="controle1_analyse1.pdf" target="_blank">Contrôle 1</a></li>
-        <li><a href="controle2_analyse1.pdf" target="_blank">Contrôle 2</a></li>
-        <li><a href="rattrapage_analyse1.pdf" target="_blank">Contrôle de rattrapage</a></li>
-      </ul>
-    </div>
-    
-    <div class="column-right">
-      <h3>Analyse 2 - 1er année du Cycle préparatoire - Semestre 2</h3>
-      
-      <p><strong>Travaux Dirigés (TDs) :</strong></p>
-      <ul>
-        <li><a href="td1_analyse2.pdf" target="_blank">TD 1 : Analyse 2</a></li>
-        <li><a href="td2_analyse2.pdf" target="_blank">TD 2 : Analyse 2</a></li>
-        <li><a href="td3_analyse2.pdf" target="_blank">TD 3 : Analyse 2</a></li>
-      </ul>
-    </div>
-
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Ouvrir le menu">
+      <span></span>
+    </button>
   </div>
+</header>
 
-    <div class="columns-container">
-    
-    <div class="column">
-      <h3>Algèbre linéaire - 1er année du Cycle préparatoire - Semestre 2</h3>
-      
-      <p><strong> Travaux Dirigés (TDs) :</strong></p>
-      <ul>
-        <li><a href="td1_algebre.pdf" target="_blank">TD 1 : Algèbre linéaire</a></li>
-        <li><a href="td2_algebre.pdf" target="_blank">TD 2 : Algèbre linéaire</a></li>
-        <li><a href="td3_algebre.pdf" target="_blank">TD 3 : Algèbre linéaire</a></li>
-        <li><a href="td4_algebre.pdf" target="_blank">TD 4 : Algèbre linéaire</a></li>
-        <li><a href="td5_algebre.pdf" target="_blank">TD 5 : Algèbre linéaire</a></li>
-      </ul>
-      
-    </div>
-    
-    <div class="column-right">
-      <h3>Analyse 4 -  2ème année du Cycle préparatoire - Semestre 4</h3>
-      
-      <p><strong>Travaux Dirigés (TDs) :</strong></p>
-      <ul>
-        <li><a href="--" target="_blank">TD 1 : Analyse 4</a></li>
-        <li><a href="--" target="_blank">TD 2 : Analyse 4</a></li>
-        <li><a href="--" target="_blank">TD 3 : Analyse 4</a></li>
-      </ul>
-    </div>
+<main id="contenu">
 
+  <section class="hero" id="accueil">
+    <div class="hero-motif"><svg viewBox="0 0 1022 230" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="11.18" y="8.41" width="7.08" height="7.08" rx="2.48" fill="#949ea8" opacity="0.07"/><rect x="31.38" y="14.56" width="6.13" height="6.13" rx="2.15" fill="#919da6" opacity="0.079"/><rect x="55.37" y="14.11" width="5.11" height="5.11" rx="1.79" fill="#8e9ca4" opacity="0.089"/><rect x="85.04" y="7.77" width="5.26" height="5.26" rx="1.84" fill="#8a9ba3" opacity="0.098"/><rect x="108.94" y="18.58" width="5.35" height="5.35" rx="1.87" fill="#879aa1" opacity="0.107"/><rect x="130.26" y="15.72" width="7.56" height="7.56" rx="2.65" fill="#84989f" opacity="0.117"/><rect x="159.0" y="12.65" width="7.54" height="7.54" rx="2.64" fill="#81979d" opacity="0.126"/><rect x="176.31" y="18.5" width="5.73" height="5.73" rx="2.0" fill="#7e969c" opacity="0.135"/><rect x="201.71" y="9.39" width="5.74" height="5.74" rx="2.01" fill="#7b959a" opacity="0.144"/><rect x="233.66" y="10.3" width="6.35" height="6.35" rx="2.22" fill="#789498" opacity="0.153"/><rect x="255.55" y="12.58" width="6.22" height="6.22" rx="2.18" fill="#759397" opacity="0.161"/><rect x="273.34" y="9.31" width="5.44" height="5.44" rx="1.9" fill="#729295" opacity="0.17"/><rect x="303.84" y="13.26" width="5.64" height="5.64" rx="1.97" fill="#6f9193" opacity="0.179"/><rect x="326.83" y="13.54" width="5.58" height="5.58" rx="1.95" fill="#6d9092" opacity="0.187"/><rect x="352.74" y="15.85" width="5.45" height="5.45" rx="1.91" fill="#6a8f90" opacity="0.196"/><rect x="374.66" y="14.22" width="6.55" height="6.55" rx="2.29" fill="#678e8f" opacity="0.204"/><rect x="399.93" y="12.22" width="6.65" height="6.65" rx="2.33" fill="#648d8d" opacity="0.212"/><rect x="418.95" y="13.35" width="6.21" height="6.21" rx="2.17" fill="#618c8b" opacity="0.22"/><rect x="443.37" y="13.92" width="5.06" height="5.06" rx="1.77" fill="#5f8b8a" opacity="0.229"/><rect x="471.2" y="15.88" width="5.82" height="5.82" rx="2.04" fill="#5c8a88" opacity="0.236"/><rect x="496.52" y="12.75" width="5.93" height="5.93" rx="2.08" fill="#598987" opacity="0.244"/><rect x="518.59" y="14.5" width="5.57" height="5.57" rx="1.95" fill="#578885" opacity="0.252"/><rect x="544.0" y="16.62" width="5.56" height="5.56" rx="1.95" fill="#548784" opacity="0.26"/><rect x="566.9" y="11.59" width="5.77" height="5.77" rx="2.02" fill="#528683" opacity="0.267"/><rect x="590.75" y="16.51" width="5.84" height="5.84" rx="2.04" fill="#4f8581" opacity="0.274"/><rect x="612.99" y="13.46" width="5.63" height="5.63" rx="1.97" fill="#4d8580" opacity="0.282"/><rect x="635.93" y="13.83" width="5.15" height="5.15" rx="1.8" fill="#4a847e" opacity="0.289"/><rect x="660.48" y="12.25" width="5.61" height="5.61" rx="1.96" fill="#48837d" opacity="0.296"/><rect x="684.67" y="13.09" width="5.28" height="5.28" rx="1.85" fill="#46827c" opacity="0.303"/><rect x="711.2" y="12.64" width="5.29" height="5.29" rx="1.85" fill="#43817b" opacity="0.309"/><rect x="734.14" y="15.11" width="5.47" height="5.47" rx="1.92" fill="#418179" opacity="0.316"/><rect x="758.93" y="13.43" width="5.21" height="5.21" rx="1.82" fill="#3f8078" opacity="0.322"/><rect x="781.69" y="14.86" width="5.43" height="5.43" rx="1.9" fill="#3d7f77" opacity="0.328"/><rect x="805.33" y="13.38" width="5.09" height="5.09" rx="1.78" fill="#3b7e76" opacity="0.334"/><rect x="829.57" y="13.98" width="5.19" height="5.19" rx="1.82" fill="#397e75" opacity="0.34"/><rect x="853.69" y="13.35" width="5.11" height="5.11" rx="1.79" fill="#377d74" opacity="0.345"/><rect x="877.86" y="14.07" width="5.2" height="5.2" rx="1.82" fill="#367c73" opacity="0.351"/><rect x="902.15" y="14.01" width="5.1" height="5.1" rx="1.78" fill="#347c72" opacity="0.355"/><rect x="926.09" y="13.76" width="5.1" height="5.1" rx="1.78" fill="#327b71" opacity="0.36"/><rect x="950.09" y="14.12" width="5.05" height="5.05" rx="1.77" fill="#317b70" opacity="0.364"/><rect x="973.99" y="13.99" width="5.0" height="5.0" rx="1.75" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="14.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="9.34" y="32.6" width="6.09" height="6.09" rx="2.13" fill="#949ea8" opacity="0.07"/><rect x="31.07" y="30.26" width="5.47" height="5.47" rx="1.91" fill="#919da6" opacity="0.079"/><rect x="56.02" y="35.96" width="5.08" height="5.08" rx="1.78" fill="#8e9ca4" opacity="0.089"/><rect x="91.43" y="39.65" width="5.43" height="5.43" rx="1.9" fill="#8a9ba3" opacity="0.098"/><rect x="106.53" y="35.86" width="6.02" height="6.02" rx="2.11" fill="#879aa1" opacity="0.107"/><rect x="128.9" y="42.71" width="7.68" height="7.68" rx="2.69" fill="#84989f" opacity="0.117"/><rect x="157.56" y="37.79" width="5.22" height="5.22" rx="1.83" fill="#81979d" opacity="0.126"/><rect x="177.01" y="36.03" width="5.66" height="5.66" rx="1.98" fill="#7e969c" opacity="0.135"/><rect x="209.97" y="33.91" width="5.06" height="5.06" rx="1.77" fill="#7b959a" opacity="0.144"/><rect x="235.23" y="38.33" width="5.34" height="5.34" rx="1.87" fill="#789498" opacity="0.153"/><rect x="254.48" y="32.74" width="6.17" height="6.17" rx="2.16" fill="#759397" opacity="0.161"/><rect x="283.1" y="41.87" width="6.48" height="6.48" rx="2.27" fill="#729295" opacity="0.17"/><rect x="299.56" y="36.64" width="5.34" height="5.34" rx="1.87" fill="#6f9193" opacity="0.179"/><rect x="328.65" y="38.32" width="6.52" height="6.52" rx="2.28" fill="#6d9092" opacity="0.187"/><rect x="348.42" y="35.43" width="6.51" height="6.51" rx="2.28" fill="#6a8f90" opacity="0.196"/><rect x="378.29" y="41.12" width="6.43" height="6.43" rx="2.25" fill="#678e8f" opacity="0.204"/><rect x="400.68" y="40.02" width="5.38" height="5.38" rx="1.88" fill="#648d8d" opacity="0.212"/><rect x="422.14" y="36.85" width="5.05" height="5.05" rx="1.77" fill="#618c8b" opacity="0.22"/><rect x="442.44" y="36.34" width="5.39" height="5.39" rx="1.89" fill="#5f8b8a" opacity="0.229"/><rect x="471.37" y="41.25" width="5.64" height="5.64" rx="1.97" fill="#5c8a88" opacity="0.236"/><rect x="496.93" y="41.27" width="6.28" height="6.28" rx="2.2" fill="#598987" opacity="0.244"/><rect x="517.15" y="36.24" width="5.29" height="5.29" rx="1.85" fill="#578885" opacity="0.252"/><rect x="540.21" y="36.26" width="5.73" height="5.73" rx="2.01" fill="#548784" opacity="0.26"/><rect x="568.2" y="39.87" width="5.53" height="5.53" rx="1.93" fill="#528683" opacity="0.267"/><rect x="590.78" y="39.53" width="5.09" height="5.09" rx="1.78" fill="#4f8581" opacity="0.274"/><rect x="614.76" y="39.93" width="5.74" height="5.74" rx="2.01" fill="#4d8580" opacity="0.282"/><rect x="639.08" y="37.9" width="5.15" height="5.15" rx="1.8" fill="#4a847e" opacity="0.289"/><rect x="663.14" y="37.34" width="5.63" height="5.63" rx="1.97" fill="#48837d" opacity="0.296"/><rect x="687.7" y="37.63" width="5.29" height="5.29" rx="1.85" fill="#46827c" opacity="0.303"/><rect x="711.45" y="38.73" width="5.11" height="5.11" rx="1.79" fill="#43817b" opacity="0.309"/><rect x="732.92" y="36.99" width="5.52" height="5.52" rx="1.93" fill="#418179" opacity="0.316"/><rect x="758.78" y="37.1" width="5.42" height="5.42" rx="1.9" fill="#3f8078" opacity="0.322"/><rect x="783.07" y="38.35" width="5.16" height="5.16" rx="1.8" fill="#3d7f77" opacity="0.328"/><rect x="806.09" y="37.29" width="5.01" height="5.01" rx="1.75" fill="#3b7e76" opacity="0.334"/><rect x="830.76" y="38.24" width="5.17" height="5.17" rx="1.81" fill="#397e75" opacity="0.34"/><rect x="854.57" y="37.91" width="5.23" height="5.23" rx="1.83" fill="#377d74" opacity="0.345"/><rect x="878.34" y="37.7" width="5.05" height="5.05" rx="1.77" fill="#367c73" opacity="0.351"/><rect x="901.84" y="37.8" width="5.09" height="5.09" rx="1.78" fill="#347c72" opacity="0.355"/><rect x="925.87" y="37.96" width="5.01" height="5.01" rx="1.75" fill="#327b71" opacity="0.36"/><rect x="950.13" y="37.95" width="5.03" height="5.03" rx="1.76" fill="#317b70" opacity="0.364"/><rect x="974.01" y="38.05" width="5.01" height="5.01" rx="1.75" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="38.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="14.38" y="54.3" width="6.41" height="6.41" rx="2.24" fill="#949ea8" opacity="0.07"/><rect x="33.09" y="54.31" width="7.48" height="7.48" rx="2.62" fill="#919da6" opacity="0.079"/><rect x="57.09" y="61.6" width="7.17" height="7.17" rx="2.51" fill="#8e9ca4" opacity="0.089"/><rect x="86.82" y="59.48" width="6.5" height="6.5" rx="2.28" fill="#8a9ba3" opacity="0.098"/><rect x="110.78" y="65.98" width="5.3" height="5.3" rx="1.85" fill="#879aa1" opacity="0.107"/><rect x="134.81" y="58.6" width="5.75" height="5.75" rx="2.01" fill="#84989f" opacity="0.117"/><rect x="161.55" y="62.1" width="6.46" height="6.46" rx="2.26" fill="#81979d" opacity="0.126"/><rect x="185.26" y="67.17" width="6.11" height="6.11" rx="2.14" fill="#7e969c" opacity="0.135"/><rect x="207.36" y="62.07" width="6.24" height="6.24" rx="2.18" fill="#7b959a" opacity="0.144"/><rect x="232.23" y="61.45" width="6.24" height="6.24" rx="2.18" fill="#789498" opacity="0.153"/><rect x="253.76" y="66.91" width="6.56" height="6.56" rx="2.29" fill="#759397" opacity="0.161"/><rect x="282.01" y="66.71" width="5.55" height="5.55" rx="1.94" fill="#729295" opacity="0.17"/><rect x="302.61" y="66.52" width="6.71" height="6.71" rx="2.35" fill="#6f9193" opacity="0.179"/><rect x="322.46" y="58.31" width="5.86" height="5.86" rx="2.05" fill="#6d9092" opacity="0.187"/><rect x="346.03" y="59.59" width="5.14" height="5.14" rx="1.8" fill="#6a8f90" opacity="0.196"/><rect x="375.5" y="64.51" width="6.59" height="6.59" rx="2.31" fill="#678e8f" opacity="0.204"/><rect x="395.09" y="63.82" width="6.11" height="6.11" rx="2.14" fill="#648d8d" opacity="0.212"/><rect x="419.15" y="65.05" width="6.54" height="6.54" rx="2.29" fill="#618c8b" opacity="0.22"/><rect x="443.88" y="65.41" width="5.6" height="5.6" rx="1.96" fill="#5f8b8a" opacity="0.229"/><rect x="469.91" y="65.49" width="6.19" height="6.19" rx="2.17" fill="#5c8a88" opacity="0.236"/><rect x="491.73" y="61.54" width="5.69" height="5.69" rx="1.99" fill="#598987" opacity="0.244"/><rect x="516.99" y="60.09" width="5.4" height="5.4" rx="1.89" fill="#578885" opacity="0.252"/><rect x="543.31" y="59.17" width="5.65" height="5.65" rx="1.98" fill="#548784" opacity="0.26"/><rect x="565.67" y="59.36" width="5.36" height="5.36" rx="1.88" fill="#528683" opacity="0.267"/><rect x="590.63" y="62.06" width="5.07" height="5.07" rx="1.77" fill="#4f8581" opacity="0.274"/><rect x="616.28" y="63.36" width="5.91" height="5.91" rx="2.07" fill="#4d8580" opacity="0.282"/><rect x="636.29" y="60.99" width="5.03" height="5.03" rx="1.76" fill="#4a847e" opacity="0.289"/><rect x="663.1" y="61.09" width="5.1" height="5.1" rx="1.79" fill="#48837d" opacity="0.296"/><rect x="685.72" y="63.48" width="5.59" height="5.59" rx="1.96" fill="#46827c" opacity="0.303"/><rect x="709.22" y="60.86" width="5.6" height="5.6" rx="1.96" fill="#43817b" opacity="0.309"/><rect x="734.2" y="62.58" width="5.05" height="5.05" rx="1.77" fill="#418179" opacity="0.316"/><rect x="756.87" y="62.48" width="5.22" height="5.22" rx="1.83" fill="#3f8078" opacity="0.322"/><rect x="781.05" y="62.98" width="5.28" height="5.28" rx="1.85" fill="#3d7f77" opacity="0.328"/><rect x="806.58" y="61.2" width="5.33" height="5.33" rx="1.86" fill="#3b7e76" opacity="0.334"/><rect x="829.3" y="62.58" width="5.15" height="5.15" rx="1.8" fill="#397e75" opacity="0.34"/><rect x="853.79" y="62.07" width="5.24" height="5.24" rx="1.84" fill="#377d74" opacity="0.345"/><rect x="877.76" y="61.62" width="5.11" height="5.11" rx="1.79" fill="#367c73" opacity="0.351"/><rect x="901.8" y="61.7" width="5.03" height="5.03" rx="1.76" fill="#347c72" opacity="0.355"/><rect x="925.76" y="61.84" width="5.03" height="5.03" rx="1.76" fill="#327b71" opacity="0.36"/><rect x="949.94" y="62.08" width="5.02" height="5.02" rx="1.76" fill="#317b70" opacity="0.364"/><rect x="974.0" y="61.96" width="5.01" height="5.01" rx="1.75" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="62.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="17.73" y="86.82" width="5.61" height="5.61" rx="1.96" fill="#949ea8" opacity="0.07"/><rect x="37.61" y="92.73" width="5.33" height="5.33" rx="1.87" fill="#919da6" opacity="0.079"/><rect x="66.78" y="84.98" width="6.48" height="6.48" rx="2.27" fill="#8e9ca4" opacity="0.089"/><rect x="90.85" y="84.45" width="6.47" height="6.47" rx="2.26" fill="#8a9ba3" opacity="0.098"/><rect x="112.63" y="92.75" width="5.96" height="5.96" rx="2.09" fill="#879aa1" opacity="0.107"/><rect x="138.49" y="88.79" width="6.72" height="6.72" rx="2.35" fill="#84989f" opacity="0.117"/><rect x="156.76" y="84.01" width="5.14" height="5.14" rx="1.8" fill="#81979d" opacity="0.126"/><rect x="177.36" y="80.62" width="6.86" height="6.86" rx="2.4" fill="#7e969c" opacity="0.135"/><rect x="203.05" y="81.94" width="5.2" height="5.2" rx="1.82" fill="#7b959a" opacity="0.144"/><rect x="233.96" y="90.3" width="6.55" height="6.55" rx="2.29" fill="#789498" opacity="0.153"/><rect x="251.57" y="83.13" width="5.65" height="5.65" rx="1.98" fill="#759397" opacity="0.161"/><rect x="277.57" y="82.35" width="5.95" height="5.95" rx="2.08" fill="#729295" opacity="0.17"/><rect x="299.58" y="90.71" width="6.98" height="6.98" rx="2.44" fill="#6f9193" opacity="0.179"/><rect x="326.46" y="83.51" width="6.88" height="6.88" rx="2.41" fill="#6d9092" opacity="0.187"/><rect x="348.23" y="84.67" width="5.0" height="5.0" rx="1.75" fill="#6a8f90" opacity="0.196"/><rect x="372.95" y="85.78" width="5.89" height="5.89" rx="2.06" fill="#678e8f" opacity="0.204"/><rect x="395.49" y="86.04" width="5.01" height="5.01" rx="1.75" fill="#648d8d" opacity="0.212"/><rect x="420.12" y="82.73" width="5.64" height="5.64" rx="1.97" fill="#618c8b" opacity="0.22"/><rect x="442.54" y="82.4" width="5.46" height="5.46" rx="1.91" fill="#5f8b8a" opacity="0.229"/><rect x="468.1" y="86.61" width="5.75" height="5.75" rx="2.01" fill="#5c8a88" opacity="0.236"/><rect x="495.68" y="87.06" width="5.96" height="5.96" rx="2.09" fill="#598987" opacity="0.244"/><rect x="520.39" y="85.3" width="5.41" height="5.41" rx="1.89" fill="#578885" opacity="0.252"/><rect x="544.85" y="83.94" width="5.85" height="5.85" rx="2.05" fill="#548784" opacity="0.26"/><rect x="566.79" y="83.5" width="5.92" height="5.92" rx="2.07" fill="#528683" opacity="0.267"/><rect x="592.0" y="86.65" width="5.75" height="5.75" rx="2.01" fill="#4f8581" opacity="0.274"/><rect x="615.47" y="84.3" width="5.49" height="5.49" rx="1.92" fill="#4d8580" opacity="0.282"/><rect x="638.02" y="87.45" width="5.7" height="5.7" rx="1.99" fill="#4a847e" opacity="0.289"/><rect x="663.29" y="86.33" width="5.71" height="5.71" rx="2.0" fill="#48837d" opacity="0.296"/><rect x="686.66" y="86.69" width="5.17" height="5.17" rx="1.81" fill="#46827c" opacity="0.303"/><rect x="708.48" y="84.81" width="5.23" height="5.23" rx="1.83" fill="#43817b" opacity="0.309"/><rect x="732.86" y="86.97" width="5.32" height="5.32" rx="1.86" fill="#418179" opacity="0.316"/><rect x="758.33" y="86.32" width="5.35" height="5.35" rx="1.87" fill="#3f8078" opacity="0.322"/><rect x="781.98" y="84.89" width="5.36" height="5.36" rx="1.87" fill="#3d7f77" opacity="0.328"/><rect x="806.47" y="86.01" width="5.2" height="5.2" rx="1.82" fill="#3b7e76" opacity="0.334"/><rect x="830.26" y="85.3" width="5.24" height="5.24" rx="1.83" fill="#397e75" opacity="0.34"/><rect x="853.67" y="85.44" width="5.07" height="5.07" rx="1.77" fill="#377d74" opacity="0.345"/><rect x="878.24" y="85.69" width="5.15" height="5.15" rx="1.8" fill="#367c73" opacity="0.351"/><rect x="902.37" y="86.0" width="5.06" height="5.06" rx="1.77" fill="#347c72" opacity="0.355"/><rect x="925.99" y="86.1" width="5.08" height="5.08" rx="1.78" fill="#327b71" opacity="0.36"/><rect x="950.04" y="86.05" width="5.0" height="5.0" rx="1.75" fill="#317b70" opacity="0.364"/><rect x="973.95" y="85.97" width="5.02" height="5.02" rx="1.76" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="86.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="6.97" y="106.3" width="7.15" height="7.15" rx="2.5" fill="#949ea8" opacity="0.07"/><rect x="40.98" y="112.72" width="5.9" height="5.9" rx="2.07" fill="#919da6" opacity="0.079"/><rect x="62.25" y="109.47" width="6.4" height="6.4" rx="2.24" fill="#8e9ca4" opacity="0.089"/><rect x="80.47" y="115.71" width="5.58" height="5.58" rx="1.95" fill="#8a9ba3" opacity="0.098"/><rect x="116.69" y="116.11" width="5.05" height="5.05" rx="1.77" fill="#879aa1" opacity="0.107"/><rect x="133.45" y="114.32" width="7.62" height="7.62" rx="2.67" fill="#84989f" opacity="0.117"/><rect x="157.34" y="106.99" width="5.55" height="5.55" rx="1.94" fill="#81979d" opacity="0.126"/><rect x="187.59" y="106.37" width="6.46" height="6.46" rx="2.26" fill="#7e969c" opacity="0.135"/><rect x="201.68" y="110.29" width="7.3" height="7.3" rx="2.55" fill="#7b959a" opacity="0.144"/><rect x="225.74" y="113.71" width="6.18" height="6.18" rx="2.16" fill="#789498" opacity="0.153"/><rect x="258.3" y="112.26" width="5.51" height="5.51" rx="1.93" fill="#759397" opacity="0.161"/><rect x="282.24" y="109.85" width="5.05" height="5.05" rx="1.77" fill="#729295" opacity="0.17"/><rect x="296.94" y="109.92" width="5.92" height="5.92" rx="2.07" fill="#6f9193" opacity="0.179"/><rect x="324.07" y="106.5" width="5.67" height="5.67" rx="1.98" fill="#6d9092" opacity="0.187"/><rect x="348.29" y="113.16" width="5.0" height="5.0" rx="1.75" fill="#6a8f90" opacity="0.196"/><rect x="376.22" y="113.0" width="5.21" height="5.21" rx="1.82" fill="#678e8f" opacity="0.204"/><rect x="401.59" y="111.79" width="6.52" height="6.52" rx="2.28" fill="#648d8d" opacity="0.212"/><rect x="420.32" y="108.98" width="5.63" height="5.63" rx="1.97" fill="#618c8b" opacity="0.22"/><rect x="449.76" y="110.67" width="5.54" height="5.54" rx="1.94" fill="#5f8b8a" opacity="0.229"/><rect x="469.49" y="108.4" width="5.07" height="5.07" rx="1.77" fill="#5c8a88" opacity="0.236"/><rect x="491.33" y="112.24" width="5.38" height="5.38" rx="1.88" fill="#598987" opacity="0.244"/><rect x="520.74" y="108.42" width="5.33" height="5.33" rx="1.87" fill="#578885" opacity="0.252"/><rect x="542.06" y="108.17" width="5.44" height="5.44" rx="1.9" fill="#548784" opacity="0.26"/><rect x="568.5" y="112.11" width="5.89" height="5.89" rx="2.06" fill="#528683" opacity="0.267"/><rect x="590.67" y="112.11" width="5.96" height="5.96" rx="2.09" fill="#4f8581" opacity="0.274"/><rect x="614.23" y="111.03" width="5.05" height="5.05" rx="1.77" fill="#4d8580" opacity="0.282"/><rect x="639.01" y="109.79" width="5.65" height="5.65" rx="1.98" fill="#4a847e" opacity="0.289"/><rect x="662.57" y="109.15" width="5.04" height="5.04" rx="1.76" fill="#48837d" opacity="0.296"/><rect x="687.53" y="108.66" width="5.34" height="5.34" rx="1.87" fill="#46827c" opacity="0.303"/><rect x="709.49" y="109.34" width="5.48" height="5.48" rx="1.92" fill="#43817b" opacity="0.309"/><rect x="735.38" y="109.31" width="5.38" height="5.38" rx="1.88" fill="#418179" opacity="0.316"/><rect x="757.49" y="110.15" width="5.2" height="5.2" rx="1.82" fill="#3f8078" opacity="0.322"/><rect x="781.26" y="109.25" width="5.09" height="5.09" rx="1.78" fill="#3d7f77" opacity="0.328"/><rect x="806.78" y="109.99" width="5.08" height="5.08" rx="1.78" fill="#3b7e76" opacity="0.334"/><rect x="830.65" y="110.8" width="5.14" height="5.14" rx="1.8" fill="#397e75" opacity="0.34"/><rect x="853.53" y="109.6" width="5.02" height="5.02" rx="1.76" fill="#377d74" opacity="0.345"/><rect x="877.84" y="109.58" width="5.05" height="5.05" rx="1.77" fill="#367c73" opacity="0.351"/><rect x="901.81" y="110.05" width="5.14" height="5.14" rx="1.8" fill="#347c72" opacity="0.355"/><rect x="926.13" y="109.95" width="5.04" height="5.04" rx="1.77" fill="#327b71" opacity="0.36"/><rect x="950.01" y="109.96" width="5.02" height="5.02" rx="1.76" fill="#317b70" opacity="0.364"/><rect x="973.94" y="109.97" width="5.02" height="5.02" rx="1.76" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="110.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="19.81" y="129.46" width="5.87" height="5.87" rx="2.05" fill="#949ea8" opacity="0.07"/><rect x="34.1" y="132.45" width="6.38" height="6.38" rx="2.23" fill="#919da6" opacity="0.079"/><rect x="68.81" y="139.23" width="7.62" height="7.62" rx="2.67" fill="#8e9ca4" opacity="0.089"/><rect x="79.07" y="127.22" width="7.06" height="7.06" rx="2.47" fill="#8a9ba3" opacity="0.098"/><rect x="115.54" y="133.63" width="6.64" height="6.64" rx="2.33" fill="#879aa1" opacity="0.107"/><rect x="127.25" y="132.53" width="7.5" height="7.5" rx="2.63" fill="#84989f" opacity="0.117"/><rect x="162.24" y="138.63" width="7.53" height="7.53" rx="2.64" fill="#81979d" opacity="0.126"/><rect x="178.84" y="129.1" width="5.39" height="5.39" rx="1.89" fill="#7e969c" opacity="0.135"/><rect x="206.27" y="136.2" width="7.27" height="7.27" rx="2.55" fill="#7b959a" opacity="0.144"/><rect x="232.57" y="135.71" width="6.77" height="6.77" rx="2.37" fill="#789498" opacity="0.153"/><rect x="253.53" y="134.57" width="5.09" height="5.09" rx="1.78" fill="#759397" opacity="0.161"/><rect x="281.01" y="131.15" width="6.96" height="6.96" rx="2.44" fill="#729295" opacity="0.17"/><rect x="303.48" y="132.0" width="5.26" height="5.26" rx="1.84" fill="#6f9193" opacity="0.179"/><rect x="323.58" y="135.33" width="6.36" height="6.36" rx="2.23" fill="#6d9092" opacity="0.187"/><rect x="346.39" y="130.01" width="5.97" height="5.97" rx="2.09" fill="#6a8f90" opacity="0.196"/><rect x="374.73" y="133.01" width="5.4" height="5.4" rx="1.89" fill="#678e8f" opacity="0.204"/><rect x="398.85" y="129.88" width="5.51" height="5.51" rx="1.93" fill="#648d8d" opacity="0.212"/><rect x="421.69" y="137.66" width="6.03" height="6.03" rx="2.11" fill="#618c8b" opacity="0.22"/><rect x="448.9" y="133.81" width="5.35" height="5.35" rx="1.87" fill="#5f8b8a" opacity="0.229"/><rect x="468.2" y="137.28" width="6.0" height="6.0" rx="2.1" fill="#5c8a88" opacity="0.236"/><rect x="492.71" y="130.79" width="5.67" height="5.67" rx="1.98" fill="#598987" opacity="0.244"/><rect x="519.1" y="133.5" width="5.32" height="5.32" rx="1.86" fill="#578885" opacity="0.252"/><rect x="542.99" y="136.5" width="5.27" height="5.27" rx="1.84" fill="#548784" opacity="0.26"/><rect x="563.44" y="133.11" width="5.46" height="5.46" rx="1.91" fill="#528683" opacity="0.267"/><rect x="590.93" y="132.46" width="5.81" height="5.81" rx="2.03" fill="#4f8581" opacity="0.274"/><rect x="615.13" y="134.02" width="5.19" height="5.19" rx="1.82" fill="#4d8580" opacity="0.282"/><rect x="640.03" y="133.18" width="5.71" height="5.71" rx="2.0" fill="#4a847e" opacity="0.289"/><rect x="660.93" y="132.9" width="5.6" height="5.6" rx="1.96" fill="#48837d" opacity="0.296"/><rect x="685.26" y="135.62" width="5.36" height="5.36" rx="1.87" fill="#46827c" opacity="0.303"/><rect x="708.99" y="133.1" width="5.27" height="5.27" rx="1.84" fill="#43817b" opacity="0.309"/><rect x="734.48" y="135.3" width="5.08" height="5.08" rx="1.78" fill="#418179" opacity="0.316"/><rect x="757.73" y="133.27" width="5.5" height="5.5" rx="1.92" fill="#3f8078" opacity="0.322"/><rect x="781.2" y="133.0" width="5.03" height="5.03" rx="1.76" fill="#3d7f77" opacity="0.328"/><rect x="805.8" y="134.76" width="5.34" height="5.34" rx="1.87" fill="#3b7e76" opacity="0.334"/><rect x="830.37" y="134.8" width="5.3" height="5.3" rx="1.85" fill="#397e75" opacity="0.34"/><rect x="853.78" y="133.59" width="5.25" height="5.25" rx="1.84" fill="#377d74" opacity="0.345"/><rect x="878.26" y="133.51" width="5.14" height="5.14" rx="1.8" fill="#367c73" opacity="0.351"/><rect x="901.91" y="133.9" width="5.05" height="5.05" rx="1.77" fill="#347c72" opacity="0.355"/><rect x="925.82" y="133.73" width="5.03" height="5.03" rx="1.76" fill="#327b71" opacity="0.36"/><rect x="949.95" y="134.14" width="5.01" height="5.01" rx="1.75" fill="#317b70" opacity="0.364"/><rect x="974.06" y="133.96" width="5.01" height="5.01" rx="1.75" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="134.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="6.79" y="157.58" width="6.19" height="6.19" rx="2.17" fill="#949ea8" opacity="0.07"/><rect x="44.5" y="153.24" width="6.13" height="6.13" rx="2.15" fill="#919da6" opacity="0.079"/><rect x="67.95" y="150.96" width="6.23" height="6.23" rx="2.18" fill="#8e9ca4" opacity="0.089"/><rect x="90.52" y="161.87" width="5.12" height="5.12" rx="1.79" fill="#8a9ba3" opacity="0.098"/><rect x="103.49" y="151.88" width="7.58" height="7.58" rx="2.65" fill="#879aa1" opacity="0.107"/><rect x="130.72" y="161.34" width="7.43" height="7.43" rx="2.6" fill="#84989f" opacity="0.117"/><rect x="155.9" y="155.03" width="7.49" height="7.49" rx="2.62" fill="#81979d" opacity="0.126"/><rect x="183.47" y="155.02" width="6.8" height="6.8" rx="2.38" fill="#7e969c" opacity="0.135"/><rect x="203.79" y="155.29" width="5.01" height="5.01" rx="1.75" fill="#7b959a" opacity="0.144"/><rect x="232.96" y="162.83" width="6.47" height="6.47" rx="2.26" fill="#789498" opacity="0.153"/><rect x="258.93" y="152.71" width="5.52" height="5.52" rx="1.93" fill="#759397" opacity="0.161"/><rect x="277.74" y="162.87" width="7.03" height="7.03" rx="2.46" fill="#729295" opacity="0.17"/><rect x="300.84" y="155.46" width="5.88" height="5.88" rx="2.06" fill="#6f9193" opacity="0.179"/><rect x="325.94" y="162.17" width="5.36" height="5.36" rx="1.87" fill="#6d9092" opacity="0.187"/><rect x="352.81" y="160.22" width="6.53" height="6.53" rx="2.29" fill="#6a8f90" opacity="0.196"/><rect x="376.41" y="158.95" width="5.58" height="5.58" rx="1.95" fill="#678e8f" opacity="0.204"/><rect x="396.48" y="156.84" width="6.32" height="6.32" rx="2.21" fill="#648d8d" opacity="0.212"/><rect x="418.64" y="155.59" width="6.2" height="6.2" rx="2.17" fill="#618c8b" opacity="0.22"/><rect x="444.09" y="154.72" width="5.05" height="5.05" rx="1.77" fill="#5f8b8a" opacity="0.229"/><rect x="470.37" y="156.76" width="6.4" height="6.4" rx="2.24" fill="#5c8a88" opacity="0.236"/><rect x="496.57" y="161.27" width="5.36" height="5.36" rx="1.87" fill="#598987" opacity="0.244"/><rect x="515.38" y="155.46" width="5.63" height="5.63" rx="1.97" fill="#578885" opacity="0.252"/><rect x="543.23" y="157.69" width="5.28" height="5.28" rx="1.85" fill="#548784" opacity="0.26"/><rect x="565.54" y="158.66" width="5.74" height="5.74" rx="2.01" fill="#528683" opacity="0.267"/><rect x="591.26" y="159.77" width="5.68" height="5.68" rx="1.99" fill="#4f8581" opacity="0.274"/><rect x="612.22" y="159.6" width="5.28" height="5.28" rx="1.85" fill="#4d8580" opacity="0.282"/><rect x="638.29" y="157.45" width="5.64" height="5.64" rx="1.97" fill="#4a847e" opacity="0.289"/><rect x="660.81" y="157.0" width="5.19" height="5.19" rx="1.82" fill="#48837d" opacity="0.296"/><rect x="684.75" y="159.38" width="5.42" height="5.42" rx="1.9" fill="#46827c" opacity="0.303"/><rect x="709.44" y="157.66" width="5.64" height="5.64" rx="1.98" fill="#43817b" opacity="0.309"/><rect x="734.02" y="157.22" width="5.47" height="5.47" rx="1.91" fill="#418179" opacity="0.316"/><rect x="758.39" y="159.25" width="5.05" height="5.05" rx="1.77" fill="#3f8078" opacity="0.322"/><rect x="781.94" y="158.71" width="5.37" height="5.37" rx="1.88" fill="#3d7f77" opacity="0.328"/><rect x="806.79" y="157.12" width="5.11" height="5.11" rx="1.79" fill="#3b7e76" opacity="0.334"/><rect x="829.39" y="157.5" width="5.31" height="5.31" rx="1.86" fill="#397e75" opacity="0.34"/><rect x="854.11" y="158.57" width="5.1" height="5.1" rx="1.78" fill="#377d74" opacity="0.345"/><rect x="878.38" y="157.95" width="5.05" height="5.05" rx="1.77" fill="#367c73" opacity="0.351"/><rect x="902.22" y="158.35" width="5.02" height="5.02" rx="1.76" fill="#347c72" opacity="0.355"/><rect x="926.05" y="158.06" width="5.02" height="5.02" rx="1.76" fill="#327b71" opacity="0.36"/><rect x="949.96" y="157.89" width="5.01" height="5.01" rx="1.75" fill="#317b70" opacity="0.364"/><rect x="973.97" y="158.01" width="5.02" height="5.02" rx="1.76" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="158.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="16.85" y="176.96" width="6.0" height="6.0" rx="2.1" fill="#949ea8" opacity="0.07"/><rect x="33.4" y="186.58" width="6.7" height="6.7" rx="2.34" fill="#919da6" opacity="0.079"/><rect x="55.45" y="176.02" width="6.19" height="6.19" rx="2.16" fill="#8e9ca4" opacity="0.089"/><rect x="86.73" y="184.02" width="5.26" height="5.26" rx="1.84" fill="#8a9ba3" opacity="0.098"/><rect x="105.29" y="184.74" width="6.15" height="6.15" rx="2.15" fill="#879aa1" opacity="0.107"/><rect x="131.07" y="179.4" width="7.58" height="7.58" rx="2.65" fill="#84989f" opacity="0.117"/><rect x="155.56" y="182.87" width="5.93" height="5.93" rx="2.08" fill="#81979d" opacity="0.126"/><rect x="180.95" y="186.57" width="7.5" height="7.5" rx="2.63" fill="#7e969c" opacity="0.135"/><rect x="204.36" y="178.35" width="6.76" height="6.76" rx="2.36" fill="#7b959a" opacity="0.144"/><rect x="226.56" y="176.27" width="7.09" height="7.09" rx="2.48" fill="#789498" opacity="0.153"/><rect x="253.15" y="185.56" width="5.9" height="5.9" rx="2.07" fill="#759397" opacity="0.161"/><rect x="282.08" y="181.58" width="5.35" height="5.35" rx="1.87" fill="#729295" opacity="0.17"/><rect x="297.05" y="182.53" width="6.31" height="6.31" rx="2.21" fill="#6f9193" opacity="0.179"/><rect x="329.99" y="177.99" width="6.21" height="6.21" rx="2.17" fill="#6d9092" opacity="0.187"/><rect x="348.8" y="182.04" width="5.27" height="5.27" rx="1.84" fill="#6a8f90" opacity="0.196"/><rect x="372.08" y="182.19" width="6.64" height="6.64" rx="2.32" fill="#678e8f" opacity="0.204"/><rect x="394.71" y="181.92" width="6.35" height="6.35" rx="2.22" fill="#648d8d" opacity="0.212"/><rect x="425.72" y="179.59" width="5.2" height="5.2" rx="1.82" fill="#618c8b" opacity="0.22"/><rect x="449.34" y="185.59" width="5.73" height="5.73" rx="2.01" fill="#5f8b8a" opacity="0.229"/><rect x="466.82" y="185.04" width="5.55" height="5.55" rx="1.94" fill="#5c8a88" opacity="0.236"/><rect x="496.71" y="182.81" width="6.11" height="6.11" rx="2.14" fill="#598987" opacity="0.244"/><rect x="515.86" y="183.8" width="5.28" height="5.28" rx="1.85" fill="#578885" opacity="0.252"/><rect x="541.44" y="184.04" width="5.98" height="5.98" rx="2.09" fill="#548784" opacity="0.26"/><rect x="564.26" y="180.45" width="5.44" height="5.44" rx="1.9" fill="#528683" opacity="0.267"/><rect x="590.09" y="181.41" width="5.13" height="5.13" rx="1.79" fill="#4f8581" opacity="0.274"/><rect x="612.81" y="183.06" width="5.84" height="5.84" rx="2.05" fill="#4d8580" opacity="0.282"/><rect x="636.01" y="182.27" width="5.66" height="5.66" rx="1.98" fill="#4a847e" opacity="0.289"/><rect x="660.17" y="183.34" width="5.09" height="5.09" rx="1.78" fill="#48837d" opacity="0.296"/><rect x="686.36" y="182.18" width="5.45" height="5.45" rx="1.91" fill="#46827c" opacity="0.303"/><rect x="709.37" y="181.74" width="5.38" height="5.38" rx="1.88" fill="#43817b" opacity="0.309"/><rect x="733.79" y="182.46" width="5.26" height="5.26" rx="1.84" fill="#418179" opacity="0.316"/><rect x="757.84" y="180.78" width="5.32" height="5.32" rx="1.86" fill="#3f8078" opacity="0.322"/><rect x="781.98" y="181.41" width="5.34" height="5.34" rx="1.87" fill="#3d7f77" opacity="0.328"/><rect x="806.54" y="181.92" width="5.07" height="5.07" rx="1.77" fill="#3b7e76" opacity="0.334"/><rect x="829.96" y="181.37" width="5.04" height="5.04" rx="1.76" fill="#397e75" opacity="0.34"/><rect x="853.91" y="181.46" width="5.12" height="5.12" rx="1.79" fill="#377d74" opacity="0.345"/><rect x="878.01" y="181.52" width="5.13" height="5.13" rx="1.8" fill="#367c73" opacity="0.351"/><rect x="901.68" y="182.18" width="5.12" height="5.12" rx="1.79" fill="#347c72" opacity="0.355"/><rect x="926.01" y="181.76" width="5.05" height="5.05" rx="1.77" fill="#327b71" opacity="0.36"/><rect x="949.96" y="182.14" width="5.01" height="5.01" rx="1.75" fill="#317b70" opacity="0.364"/><rect x="974.05" y="182.06" width="5.02" height="5.02" rx="1.76" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="182.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/><rect x="13.87" y="213.31" width="7.93" height="7.93" rx="2.78" fill="#949ea8" opacity="0.07"/><rect x="32.81" y="210.47" width="7.88" height="7.88" rx="2.76" fill="#919da6" opacity="0.079"/><rect x="55.49" y="203.76" width="7.27" height="7.27" rx="2.54" fill="#8e9ca4" opacity="0.089"/><rect x="81.05" y="211.75" width="5.8" height="5.8" rx="2.03" fill="#8a9ba3" opacity="0.098"/><rect x="114.42" y="201.01" width="6.41" height="6.41" rx="2.24" fill="#879aa1" opacity="0.107"/><rect x="139.67" y="202.06" width="5.71" height="5.71" rx="2.0" fill="#84989f" opacity="0.117"/><rect x="158.08" y="203.64" width="5.1" height="5.1" rx="1.78" fill="#81979d" opacity="0.126"/><rect x="178.01" y="201.75" width="7.35" height="7.35" rx="2.57" fill="#7e969c" opacity="0.135"/><rect x="208.17" y="210.77" width="5.41" height="5.41" rx="1.89" fill="#7b959a" opacity="0.144"/><rect x="233.3" y="201.54" width="6.23" height="6.23" rx="2.18" fill="#789498" opacity="0.153"/><rect x="255.52" y="204.44" width="6.94" height="6.94" rx="2.43" fill="#759397" opacity="0.161"/><rect x="278.59" y="206.85" width="6.88" height="6.88" rx="2.41" fill="#729295" opacity="0.17"/><rect x="297.97" y="211.03" width="6.28" height="6.28" rx="2.2" fill="#6f9193" opacity="0.179"/><rect x="324.97" y="208.9" width="5.52" height="5.52" rx="1.93" fill="#6d9092" opacity="0.187"/><rect x="354.56" y="206.72" width="5.67" height="5.67" rx="1.98" fill="#6a8f90" opacity="0.196"/><rect x="376.34" y="205.49" width="5.31" height="5.31" rx="1.86" fill="#678e8f" opacity="0.204"/><rect x="400.05" y="202.2" width="6.38" height="6.38" rx="2.23" fill="#648d8d" opacity="0.212"/><rect x="420.04" y="207.11" width="6.57" height="6.57" rx="2.3" fill="#618c8b" opacity="0.22"/><rect x="446.65" y="207.24" width="5.47" height="5.47" rx="1.92" fill="#5f8b8a" opacity="0.229"/><rect x="466.45" y="202.68" width="5.21" height="5.21" rx="1.82" fill="#5c8a88" opacity="0.236"/><rect x="494.78" y="205.55" width="5.69" height="5.69" rx="1.99" fill="#598987" opacity="0.244"/><rect x="520.49" y="203.68" width="5.29" height="5.29" rx="1.85" fill="#578885" opacity="0.252"/><rect x="542.9" y="203.19" width="5.0" height="5.0" rx="1.75" fill="#548784" opacity="0.26"/><rect x="565.2" y="203.84" width="5.39" height="5.39" rx="1.89" fill="#528683" opacity="0.267"/><rect x="588.6" y="206.43" width="5.6" height="5.6" rx="1.96" fill="#4f8581" opacity="0.274"/><rect x="612.61" y="206.58" width="5.45" height="5.45" rx="1.91" fill="#4d8580" opacity="0.282"/><rect x="636.42" y="207.89" width="5.21" height="5.21" rx="1.82" fill="#4a847e" opacity="0.289"/><rect x="660.61" y="204.4" width="5.51" height="5.51" rx="1.93" fill="#48837d" opacity="0.296"/><rect x="687.33" y="207.01" width="5.29" height="5.29" rx="1.85" fill="#46827c" opacity="0.303"/><rect x="709.24" y="204.42" width="5.42" height="5.42" rx="1.9" fill="#43817b" opacity="0.309"/><rect x="734.18" y="205.57" width="5.37" height="5.37" rx="1.88" fill="#418179" opacity="0.316"/><rect x="757.86" y="207.12" width="5.37" height="5.37" rx="1.88" fill="#3f8078" opacity="0.322"/><rect x="781.44" y="206.9" width="5.02" height="5.02" rx="1.76" fill="#3d7f77" opacity="0.328"/><rect x="806.06" y="205.82" width="5.09" height="5.09" rx="1.78" fill="#3b7e76" opacity="0.334"/><rect x="829.29" y="206.45" width="5.0" height="5.0" rx="1.75" fill="#397e75" opacity="0.34"/><rect x="854.07" y="206.58" width="5.04" height="5.04" rx="1.76" fill="#377d74" opacity="0.345"/><rect x="877.69" y="206.11" width="5.11" height="5.11" rx="1.79" fill="#367c73" opacity="0.351"/><rect x="902.11" y="206.24" width="5.03" height="5.03" rx="1.76" fill="#347c72" opacity="0.355"/><rect x="925.9" y="205.89" width="5.01" height="5.01" rx="1.75" fill="#327b71" opacity="0.36"/><rect x="950.12" y="206.09" width="5.05" height="5.05" rx="1.77" fill="#317b70" opacity="0.364"/><rect x="973.94" y="206.04" width="5.02" height="5.02" rx="1.76" fill="#307a6f" opacity="0.368"/><rect x="998.0" y="206.0" width="5.0" height="5.0" rx="1.75" fill="#2f7a6f" opacity="0.37"/></svg></div>
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow">Mathématiques appliquées · EDP · Traitement d'images</span>
+        <h1>Jamal Attmani</h1>
+        <p class="role">Docteur en Mathématiques Appliquées et Informatique — Professeur Agrégé de Mathématiques</p>
+        <p class="lede">Ce site présente mes activités d'enseignement en Cycle préparatoire, mes axes de recherche en équations aux dérivées partielles et en restauration d'images, ainsi que mes publications scientifiques.</p>
+        <div class="hero-stats">
+          <div><strong>8</strong><span>Publications</span></div>
+          <div><strong>4</strong><span>Cours enseignés</span></div>
+          <div><strong>8</strong><span>Axes de recherche</span></div>
+        </div>
+      </div>
+      <div class="portrait-frame">
+        <img src="photo_jamal.jpeg" alt="Photo de Jamal Attmani">
+      </div>
+    </div>
+  </section>
+
+  <section id="enseignement">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Enseignement</span>
+        <h2>Cours, travaux dirigés et contrôles</h2>
+        <p>Supports de cours pour le Cycle préparatoire — les documents s'ouvrent au format PDF dans un nouvel onglet.</p>
+      </div>
+      <div class="course-grid">
+        <article class="course-card"><p class="course-tag">Semestre 1 · 1ʳᵉ année, Cycle préparatoire</p><h3>Analyse 1</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_analyse1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 — Analyse 1</span></a></li><li><a class="file-pill" href="td2_analyse1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 — Analyse 1</span></a></li><li><a class="file-pill" href="td3_analyse1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 — Analyse 1</span></a></li></ul></div><div class="course-group"><h4>Contrôles</h4><ul class="file-list"><li><a class="file-pill" href="controle1_analyse1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle 1</span></a></li><li><a class="file-pill" href="controle2_analyse1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle 2</span></a></li><li><a class="file-pill" href="rattrapage_analyse1.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle de rattrapage</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 2 · 1ʳᵉ année, Cycle préparatoire</p><h3>Analyse 2</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_analyse2.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 — Analyse 2</span></a></li><li><a class="file-pill" href="td2_analyse2.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 — Analyse 2</span></a></li><li><a class="file-pill" href="td3_analyse2.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 — Analyse 2</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 2 · 1ʳᵉ année, Cycle préparatoire</p><h3>Algèbre linéaire</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_algebre.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 — Algèbre linéaire</span></a></li><li><a class="file-pill" href="td2_algebre.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 — Algèbre linéaire</span></a></li><li><a class="file-pill" href="td3_algebre.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 — Algèbre linéaire</span></a></li><li><a class="file-pill" href="td4_algebre.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 4 — Algèbre linéaire</span></a></li><li><a class="file-pill" href="td5_algebre.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 5 — Algèbre linéaire</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 4 · 2ᵉ année, Cycle préparatoire</p><h3>Analyse 4</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><span class="file-pill file-pill--off" aria-disabled="true"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 1 — Analyse 4</span><em>bientôt disponible</em></span></li><li><span class="file-pill file-pill--off" aria-disabled="true"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 2 — Analyse 4</span><em>bientôt disponible</em></span></li><li><span class="file-pill file-pill--off" aria-disabled="true"><svg viewBox="0 0 24 24" class="ic-doc"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 3 — Analyse 4</span><em>bientôt disponible</em></span></li></ul></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="recherche">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Recherche</span>
+        <h2>Domaines de recherche</h2>
+        <p>Mes travaux portent principalement sur l'analyse non linéaire, l'analyse numérique et leurs applications au traitement d'images.</p>
+      </div>
+      <ul class="domain-list">
+        <li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Équations aux dérivées partielles (EDP) non linéaires et fractionnaires</span></li><li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Restauration et débruitage d'images (image denoising / image restoration)</span></li><li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Optimisation sous contraintes EDP et contrôle optimal</span></li><li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Analyse numérique : schémas de volumes finis et d'éléments finis, étude de convergence</span></li><li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Analyse non lisse et optimisation (nonsmooth analysis and optimization)</span></li><li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Modélisation mathématique de systèmes complexes</span></li><li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Intelligence artificielle et deep learning appliqués au traitement d'images (U-Net, vision par ordinateur)</span></li><li><svg class="domain-icon" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect x="1.32" y="0.94" width="3.33" height="3.33" rx="1.0" fill="#949ea8" opacity="0.45"/><rect x="7.31" y="1.74" width="3.92" height="3.92" rx="1.18" fill="#879aa1" opacity="0.519"/><rect x="15.47" y="3.03" width="3.75" height="3.75" rx="1.12" fill="#7b959a" opacity="0.588"/><rect x="1.73" y="8.71" width="3.38" height="3.38" rx="1.01" fill="#6e9093" opacity="0.656"/><rect x="9.06" y="8.64" width="3.19" height="3.19" rx="0.96" fill="#628c8c" opacity="0.725"/><rect x="15.17" y="9.16" width="3.11" height="3.11" rx="0.93" fill="#558884" opacity="0.794"/><rect x="2.5" y="14.61" width="3.09" height="3.09" rx="0.93" fill="#48837d" opacity="0.863"/><rect x="8.49" y="15.1" width="3.17" height="3.17" rx="0.95" fill="#3c7e76" opacity="0.931"/><rect x="15.0" y="15.0" width="3.0" height="3.0" rx="0.9" fill="#2f7a6f" opacity="1.0"/></svg><span>Calcul scientifique et programmation numérique (Python, Matlab, C/C++)</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Publications</span>
+        <h2>Publications scientifiques</h2>
+        <p>Articles publiés dans des revues et actes de conférences à comité de lecture.</p>
+      </div>
+
+      <h3 class="pub-subhead">Articles publiés</h3>
+      <ul class="pub-list">
+        <li class="pub"><div class="pub-top"><span class="pub-year">2026</span></div><p class="pub-authors"><strong class="me">J. Attmani</strong>, F. Bendaida, A. Bekkari</p><a class="pub-title" href="https://link.springer.com/chapter/10.1007/978-3-032-17079-8_1" target="_blank" rel="noopener">Nonlocal Image Denoising via Threshold-Based Diffusion and H−s Fidelity<svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a><p class="pub-venue">Mathematics and Intelligent Systems in Industry: MISI'25 Conference</p></li><li class="pub"><div class="pub-top"><span class="pub-year">2026</span></div><p class="pub-authors">Z. Ankhili, <strong class="me">J. Attmani</strong>, F. Karami, D. Meskine</p><a class="pub-title" href="https://www.aimsciences.org/article/doi/10.3934/eect.2026037" target="_blank" rel="noopener">A new PDE-Constrained optimization applied to image denoising<svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a><p class="pub-venue">Evolution Equations and Control Theory, 21, 131-154</p></li><li class="pub"><div class="pub-top"><span class="pub-year">2026</span></div><p class="pub-authors">H. Matich, <strong class="me">J. Attmani</strong>, H. Mousannif</p><a class="pub-title" href="https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1741082/full" target="_blank" rel="noopener">Enhancing crack detection and severity assessment in historical Tabiya basins using U-Net and adaptive thresholding<svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a><p class="pub-venue">Frontiers in Artificial Intelligence, 9, 1741082</p></li><li class="pub"><div class="pub-top"><span class="pub-year">2024</span></div><p class="pub-authors">A. Atlas, <strong class="me">J. Attmani</strong>, F. Karami, D. Meskine</p><a class="pub-title" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/mma.9998" target="_blank" rel="noopener">Optimal control problem with nonlinear fractional system constraint applied to image restoration<svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a><p class="pub-venue">Mathematical Methods in the Applied Sciences, 47(9), 7714-7741</p></li><li class="pub"><div class="pub-top"><span class="pub-year">2022</span></div><p class="pub-authors"><strong class="me">J. Attmani</strong>, A. Atlas, F. Karami</p><a class="pub-title" href="https://reference-global.com/article/10.2478/mjpaa-2022-0027" target="_blank" rel="noopener">Convergence of a finite volume scheme for a parabolic system applied to image processing<svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a><p class="pub-venue">Moroccan J. Pure Appl. Anal, 8, 401-437</p></li>
+      </ul>
+
+      <h3 class="pub-subhead">Travaux soumis et acceptés</h3>
+      <ul class="pub-list">
+        <li class="pub"><div class="pub-top"><span class="badge badge--soumis">Soumise</span></div><p class="pub-authors">Atlas, A., <strong class="me">Attmani, J.</strong>, Bekkari, A., Erraji, E.</p><p class="pub-title pub-title--plain">A Nonlinear Fractional Parabolic System with Variable Exponents for Image Denoising</p><p class="pub-venue">Computational and Applied Mathematics</p></li><li class="pub"><div class="pub-top"><span class="badge badge--soumis">Soumise</span></div><p class="pub-authors">Atlas, A., <strong class="me">Attmani, J.</strong>, Karami, F., Meskine, D.</p><p class="pub-title pub-title--plain">Convergence Analysis of a Finite Volume Scheme for a Non-Variational Model in Image Denoising</p><p class="pub-venue">ESAIM: Mathematical Modelling and Numerical Analysis</p></li><li class="pub"><div class="pub-top"><span class="badge badge--accept">Acceptée</span></div><p class="pub-authors">Atlas, A., <strong class="me">Attmani, J.</strong>, Bendaida, F., Karami, F.</p><p class="pub-title pub-title--plain">A Novel Dynamic Threshold Model for Image Restoration</p><p class="pub-venue">Springer (Birkhäuser, Trends in Mathematics)</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="alt" id="agregation">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Agrégation</span>
+        <h2>Tirages des oraux de l'agrégation (2024)</h2>
+        <p>Sujets tirés lors des oraux du concours de l'agrégation de mathématiques.</p>
+      </div>
+      <ul class="agreg-list">
+        <li><a class="agreg-link" href="https://agreg-maths.fr/lecons/1096" target="_blank" rel="noopener"><span class="agreg-domaine">Algèbre et Géométrie</span><span class="agreg-titre">Barycentres dans un espace affine réel de dimension finie, convexité. Applications.</span><svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a></li><li><a class="agreg-link" href="https://agreg-maths.fr/lecons/928" target="_blank" rel="noopener"><span class="agreg-domaine">Analyse et Probabilités</span><span class="agreg-titre">Continuité et dérivabilité des fonctions réelles d'une variable réelle</span><svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a></li><li><a class="agreg-link" href="mod.pdf" target="_blank" rel="noopener"><span class="agreg-domaine">Textes de modélisation</span><span class="agreg-titre">Position optimale d'une charge suspendue</span><svg viewBox="0 0 24 24" class="ic-out"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Contact</span>
+        <h2>Me contacter</h2>
+      </div>
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:mr.jamal.attmani@gmail.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M3 6.5h18v11H3z"/><path d="M3 6.5l9 7 9-7"/></svg><span class="contact-text"><strong>Email</strong><em>mr.jamal.attmani@gmail.com</em></span></a><a class="contact-card" href="https://scholar.google.com/citations?user=7ha3FgkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 14 14 10"/><path d="M11.5 6.5h3a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4h-2"/><path d="M12.5 17.5h-3a4 4 0 0 1-4-4v0a4 4 0 0 1 4-4h2"/></svg><span class="contact-text"><strong>Google Scholar</strong><em>Profil et citations</em></span></a><a class="contact-card" href="https://www.researchgate.net/profile/Jamal-Attmani-2" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 14 14 10"/><path d="M11.5 6.5h3a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4h-2"/><path d="M12.5 17.5h-3a4 4 0 0 1-4-4v0a4 4 0 0 1 4-4h2"/></svg><span class="contact-text"><strong>ResearchGate</strong><em>Publications et profil</em></span></a><a class="contact-card" href="https://www.linkedin.com/in/jamal-attmani/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ic"><path d="M10 14 14 10"/><path d="M11.5 6.5h3a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4h-2"/><path d="M12.5 17.5h-3a4 4 0 0 1-4-4v0a4 4 0 0 1 4-4h2"/></svg><span class="contact-text"><strong>LinkedIn</strong><em>Profil professionnel</em></span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="eyebrow">© 2026 Jamal Attmani</span>
+    <span>Site académique — Cycle préparatoire</span>
   </div>
+</footer>
 
-    <h2>Domaines de recherche</h2>
-  <ul class="publications-list">
+<script>
+(function(){
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('primary-nav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    }
+  });
 
-    <li>
-      Équations aux Dérivées Partielles (EDP) non linéaires et fractionnaires
-    </li>
-    <li>
-      Restauration et débruitage d'images (Image Denoising / Image Restoration)
-    </li>
-    <li>
-      Optimisation sous contraintes EDP et contrôle optimal
-    </li>
-    <li>
-      Analyse numérique : schémas de volumes finis et éléments finis, étude de convergence
-    </li>
-    <li>
-      Analyse non lisse et optimisation (Nonsmooth Analysis and Optimization)
-    </li>
-    <li>
-      Modélisation mathématique de systèmes complexes
-    </li>
-    <li>
-      Intelligence artificielle et deep learning appliqués au traitement d'images (U-Net, vision par ordinateur)
-    </li>
-    <li>
-    Calcul scientifique et programmation numérique (Python, Matlab, C/C++)
-    </li>
-  </ul>
-  
-  <h2>Publications</h2>
-  <ul class="publications-list">
-
-    <li>
-      <strong>J. Attmani, F. Bendaida, A. Bekkari</strong> (2026). 
-      <a href="https://link.springer.com/chapter/10.1007/978-3-032-17079-8_1" target="_blank"><em>Nonlocal Image Denoising via Threshold-Based Diffusion and H−s Fidelity</em></a>. 
-      Mathematics and Intelligent Systems in Industry: MISI'25 Conference.
-    </li>
-    <li>
-      <strong>Z. Ankhili, J. Attmani, F. Karami, D. Meskine</strong> (2026). 
-      <a href="https://www.aimsciences.org/article/doi/10.3934/eect.2026037" target="_blank"><em>A new PDE-Constrained optimization applied to image denoising</em></a>. 
-      Evolution Equations and Control Theory, 21, 131-154.
-    </li>
-    <li>
-      <strong>H. Matich, J. Attmani, H. Mousannif</strong> (2026). 
-      <a href="https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1741082/full" target="_blank"><em>Enhancing crack detection and severity assessment in historical Tabiya basins using U-Net and adaptive thresholding</em></a>. 
-      Frontiers in Artificial Intelligence, 9, 1741082.
-    </li>
-    <li>
-      <strong>A. Atlas, J. Attmani, F. Karami, D. Meskine</strong> (2024). 
-      <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/mma.9998" target="_blank"><em>Optimal control problem with nonlinear fractional system constraint applied to image restoration</em></a>. 
-      Mathematical Methods in the Applied Sciences, 47(9), 7714-7741.
-    </li>
-    <li>
-      <strong>J. Attmani, A. Atlas, F. Karami</strong> (2022). 
-      <a href="https://reference-global.com/article/10.2478/mjpaa-2022-0027" target="_blank"><em>Convergence of a finite volume scheme for a parabolic system applied to image processing</em></a>. 
-      Moroccan J. Pure Appl. Anal, 8, 401-437.
-    </li>
-    <li>
-      <strong>Atlas, A., Attmani, J., Bekkari, A., Erraji, E.</strong> (Soumise). 
-      <a><em>A Nonlinear Fractional Parabolic System with Variable Exponents for Image Denoising.</em></a>. 
-      Computational and Applied Mathematics.
-    </li>
-
-    <li>
-      <strong>Atlas, A., Attmani, J., Karami, F., Meskine, D.</strong> (Soumise). 
-      <a><em>Convergence Analysis of a Finite Volume Scheme for a Non-Variational Model in Image Denoising.</em></a>. 
-      ESAIM: Mathematical Modelling and Numerical Analysis.
-    </li>
-
-    <li>
-      <strong>Atlas, A., Attmani, J., Bendaida, F., Karami, F.</strong> (Acceptée). 
-      <a><em>A Novel Dynamic Threshold Model for Image Restoration.</em></a>. 
-      Springer (Birkhäuser, Trends in Mathematics).
-    </li>
-  </ul>
-
-
-
-
-
-
-  
-  <h2>Tirages des oraux de l’agrégation (2024)</h2>
-  
-  <li><a href="https://agreg-maths.fr/lecons/1096" target="_blank"> Algèbre et Géométrie : Barycentres dans un espace affine réel de dimension finie, convexité. Applications.
-</a></li>
-  <li><a href="https://agreg-maths.fr/lecons/928" target="_blank">Analyse et Probabilités : Continuité et dérivabilité des fonctions réelles d'une variable réelle
-</a></li>
-  <li><a href="mod.pdf" target="_blank">Textes de modélisation : Position optimale d'une charge suspendue</a></li>
-  <h2>Contact</h2>
-  <p>Email : <a href="mailto:mr.jamal.attmani@gmail.com">mr.jamal.attmani@gmail.com</a></p>
-  <p><a href="https://scholar.google.com/citations?user=7ha3FgkAAAAJ&hl=en&oi=ao" target="_blank">Google Scholar</a>.</p>
-  <p><a href="https://www.researchgate.net/profile/Jamal-Attmani-2" target="_blank">ResearchGate</a></p>
-  <p><a href="https://www.linkedin.com/in/jamal-attmani/" target="_blank">LinkedIn</a></p>
-  
-
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  var sections = links.map(function(l){ return document.querySelector(l.getAttribute('href')); });
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var idx = sections.indexOf(entry.target);
+          links.forEach(function(l){ l.classList.remove('active'); });
+          if(idx > -1) links[idx].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function(s){ if(s) obs.observe(s); });
+  }
+})();
+</script>
 </body>
 </html>
