@@ -57,6 +57,38 @@
     color:var(--green);font-weight:bold;
   }
 
+  /* enseignement: card grid + pill links */
+  .course-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:18px;
+  }
+  .course-card{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:22px 22px 20px;
+    box-shadow:0 1px 2px rgba(20,30,40,.04), 0 8px 18px -12px rgba(20,30,40,.14);
+  }
+  .course-card h3{margin-top:0;}
+  .course-tag{
+    font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);margin:0 0 6px;
+  }
+  .course-group{margin-top:14px;}
+  .course-group h4{
+    font-size:.85rem;font-weight:bold;color:var(--muted);margin:0 0 8px;
+    text-transform:uppercase;letter-spacing:.02em;
+  }
+  .file-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+  .file-pill{
+    display:inline-flex;align-items:center;gap:6px;background:var(--blue-soft);color:var(--blue);
+    text-decoration:none;font-size:.85rem;padding:6px 12px 6px 9px;border-radius:999px;
+    border:1px solid transparent;
+  }
+  .file-pill:hover{background:#cfe1ef;border-color:var(--blue);}
+  .file-pill--off{background:#eef0ef;color:var(--muted);}
+  .file-pill--off em{font-style:normal;font-size:.72rem;margin-left:3px;opacity:.85;}
+  .ic-doc{
+    width:14px;height:14px;flex-shrink:0;
+    fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;
+  }
+
   /* header / nav */
   header{margin-bottom:36px;}
   .header-row{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
@@ -86,6 +118,9 @@
     color:var(--muted);font-size:.85rem;
   }
 
+  @media (max-width:760px){
+    .course-grid{grid-template-columns:1fr;}
+  }
   @media (max-width:560px){
     .header-row{flex-direction:column;}
     .photo{width:120px;height:150px;}
@@ -115,53 +150,9 @@
   </header>
 
   <h2 id="enseignement">Enseignement</h2>
-  <h3>Analyse 1</h3>
-<p class="tag">Semestre 1 — 1ʳᵉ année du Cycle préparatoire</p>
-<p class="label">Travaux dirigés</p>
-<ul>
-<li><a href="td1_analyse1.pdf" target="_blank" rel="noopener">TD 1 : Analyse 1</a></li>
-<li><a href="td2_analyse1.pdf" target="_blank" rel="noopener">TD 2 : Analyse 1</a></li>
-<li><a href="td3_analyse1.pdf" target="_blank" rel="noopener">TD 3 : Analyse 1</a></li>
-</ul>
-<p class="label">Contrôles</p>
-<ul>
-<li><a href="controle1_analyse1.pdf" target="_blank" rel="noopener">Contrôle 1</a></li>
-<li><a href="controle2_analyse1.pdf" target="_blank" rel="noopener">Contrôle 2</a></li>
-<li><a href="rattrapage_analyse1.pdf" target="_blank" rel="noopener">Contrôle de rattrapage</a></li>
-</ul>
-
-<hr>
-<h3>Analyse 2</h3>
-<p class="tag">Semestre 2 — 1ʳᵉ année du Cycle préparatoire</p>
-<p class="label">Travaux dirigés</p>
-<ul>
-<li><a href="td1_analyse2.pdf" target="_blank" rel="noopener">TD 1 : Analyse 2</a></li>
-<li><a href="td2_analyse2.pdf" target="_blank" rel="noopener">TD 2 : Analyse 2</a></li>
-<li><a href="td3_analyse2.pdf" target="_blank" rel="noopener">TD 3 : Analyse 2</a></li>
-</ul>
-
-<hr>
-<h3>Algèbre linéaire</h3>
-<p class="tag">Semestre 2 — 1ʳᵉ année du Cycle préparatoire</p>
-<p class="label">Travaux dirigés</p>
-<ul>
-<li><a href="td1_algebre.pdf" target="_blank" rel="noopener">TD 1 : Algèbre linéaire</a></li>
-<li><a href="td2_algebre.pdf" target="_blank" rel="noopener">TD 2 : Algèbre linéaire</a></li>
-<li><a href="td3_algebre.pdf" target="_blank" rel="noopener">TD 3 : Algèbre linéaire</a></li>
-<li><a href="td4_algebre.pdf" target="_blank" rel="noopener">TD 4 : Algèbre linéaire</a></li>
-<li><a href="td5_algebre.pdf" target="_blank" rel="noopener">TD 5 : Algèbre linéaire</a></li>
-</ul>
-
-<hr>
-<h3>Analyse 4</h3>
-<p class="tag">Semestre 4 — 2ᵉ année du Cycle préparatoire</p>
-<p class="label">Travaux dirigés</p>
-<ul>
-<li class="muted">TD 1 : Analyse 4 <em>(bientôt disponible)</em></li>
-<li class="muted">TD 2 : Analyse 4 <em>(bientôt disponible)</em></li>
-<li class="muted">TD 3 : Analyse 4 <em>(bientôt disponible)</em></li>
-</ul>
-
+  <div class="course-grid">
+  <article class="course-card"><p class="course-tag">Semestre 1 — 1ʳᵉ année du Cycle préparatoire</p><h3>Analyse 1</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 : Analyse 1</span></a></li><li><a class="file-pill" href="td2_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 : Analyse 1</span></a></li><li><a class="file-pill" href="td3_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 : Analyse 1</span></a></li></ul></div><div class="course-group"><h4>Contrôles</h4><ul class="file-list"><li><a class="file-pill" href="controle1_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle 1</span></a></li><li><a class="file-pill" href="controle2_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle 2</span></a></li><li><a class="file-pill" href="rattrapage_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle de rattrapage</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 2 — 1ʳᵉ année du Cycle préparatoire</p><h3>Analyse 2</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_analyse2.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 : Analyse 2</span></a></li><li><a class="file-pill" href="td2_analyse2.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 : Analyse 2</span></a></li><li><a class="file-pill" href="td3_analyse2.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 : Analyse 2</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 2 — 1ʳᵉ année du Cycle préparatoire</p><h3>Algèbre linéaire</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td2_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td3_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td4_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 4 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td5_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 5 : Algèbre linéaire</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 4 — 2ᵉ année du Cycle préparatoire</p><h3>Analyse 4</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><span class="file-pill file-pill--off" aria-disabled="true"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 1 : Analyse 4</li><li><span class="file-pill file-pill--off" aria-disabled="true"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 2 : Analyse 4</li><li><span class="file-pill file-pill--off" aria-disabled="true"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 3 : Analyse 4</li></ul></div></article>
+  </div>
 
   <h2 id="recherche">Domaines de recherche</h2>
   <ul>
