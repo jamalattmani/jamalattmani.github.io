@@ -10,7 +10,13 @@
     --bg:#fbfbfa;
     --text:#23262b;
     --muted:#6b6f76;
-    --accent:#0b4f87;
+    --navy:#173b5e;
+    --blue:#0b4f87;
+    --blue-soft:#e6eef5;
+    --amber:#9a4f12;
+    --amber-soft:#f6e9da;
+    --green:#176b4d;
+    --green-soft:#e1f0e8;
     --line:#dddedb;
   }
   *{box-sizing:border-box;}
@@ -21,30 +27,35 @@
     font-family:Georgia, 'Times New Roman', serif;
     line-height:1.7;
     font-size:17px;
+    border-top:5px solid var(--blue);
   }
   .wrap{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
   img{max-width:100%;}
-  a{color:var(--accent);text-decoration:underline;text-decoration-color:#0b4f8755;}
-  a:hover{text-decoration-color:var(--accent);}
+  a{color:var(--blue);text-decoration:underline;text-decoration-color:#0b4f8755;}
+  a:hover{text-decoration-color:var(--blue);}
   h1,h2,h3{font-weight:normal;}
-  h1{font-size:1.9rem;margin:0 0 4px;}
+  h1{font-size:1.9rem;margin:0 0 4px;color:var(--navy);}
   h2{
     font-size:1.3rem;margin:48px 0 16px;padding-bottom:8px;
-    border-bottom:1px solid var(--line);
+    color:var(--navy);border-bottom:2px solid var(--blue);
   }
-  h3{font-size:1.1rem;margin:28px 0 4px;color:var(--accent);}
+  h3{font-size:1.1rem;margin:28px 0 4px;color:var(--amber);}
   h2:first-of-type{margin-top:0;}
   p{margin:0 0 12px;}
   .role{color:var(--muted);font-style:italic;margin:0 0 18px;}
   .tag{
-    font-size:.85rem;color:var(--muted);margin:0 0 8px;
+    display:inline-block;font-size:.8rem;color:var(--blue);background:var(--blue-soft);
+    padding:2px 9px;border-radius:4px;margin:0 0 10px;
   }
-  .label{font-weight:bold;margin:14px 0 4px;font-size:.95rem;}
+  .label{font-weight:bold;margin:14px 0 4px;font-size:.95rem;color:var(--text);}
   ul{margin:4px 0 4px;padding-left:22px;}
   li{margin-bottom:4px;}
   li.muted{color:var(--muted);}
   li.muted em{font-style:italic;font-size:.9em;}
   hr{border:none;border-top:1px solid var(--line);margin:24px 0;}
+  .domaine{
+    color:var(--green);font-weight:bold;
+  }
 
   /* header / nav */
   header{margin-bottom:36px;}
@@ -54,14 +65,21 @@
   }
   .intro{flex:1;min-width:240px;}
   nav{margin-top:18px;font-size:.95rem;}
-  nav a{margin-right:16px;text-decoration:none;color:var(--accent);}
-  nav a:hover{text-decoration:underline;}
+  nav a{
+    margin-right:6px;text-decoration:none;color:var(--blue);
+    padding:5px 10px;border-radius:5px;display:inline-block;
+  }
+  nav a:hover{background:var(--blue-soft);}
 
   /* publications */
   .pub-list{list-style:none;padding-left:0;}
   .pub-list li{margin-bottom:14px;}
-  .year{color:var(--muted);}
-  .status{color:var(--muted);font-style:italic;}
+  .year{color:var(--blue);font-weight:bold;}
+  .status-soumis,.status-accept{
+    display:inline-block;font-size:.8rem;font-style:normal;padding:1px 8px;border-radius:4px;
+  }
+  .status-soumis{background:var(--amber-soft);color:var(--amber);}
+  .status-accept{background:var(--green-soft);color:var(--green);}
 
   footer{
     margin-top:56px;padding-top:16px;border-top:1px solid var(--line);
@@ -71,7 +89,7 @@
   @media (max-width:560px){
     .header-row{flex-direction:column;}
     .photo{width:120px;height:150px;}
-    nav a{display:inline-block;margin-bottom:6px;}
+    nav a{padding:5px 8px;}
   }
 </style>
 </head>
@@ -139,9 +157,9 @@
 <p class="tag">Semestre 4 — 2ᵉ année du Cycle préparatoire</p>
 <p class="label">Travaux dirigés</p>
 <ul>
-<li class="muted">TD 1 : Analyse 4 <em>(bientôt disponible)</em></li>
-<li class="muted">TD 2 : Analyse 4 <em>(bientôt disponible)</em></li>
-<li class="muted">TD 3 : Analyse 4 <em>(bientôt disponible)</em></li>
+<li class="muted">TD 1 : Analyse 4 </li>
+<li class="muted">TD 2 : Analyse 4 </li>
+<li class="muted">TD 3 : Analyse 4 </li>
 </ul>
 
 
@@ -170,23 +188,21 @@
 
   <p class="label">Travaux soumis et acceptés</p>
   <ul class="pub-list">
-  <li>Atlas, A., <strong>Attmani, J.</strong>, Bekkari, A., Erraji, E.. <em>A Nonlinear Fractional Parabolic System with Variable Exponents for Image Denoising</em>. Computational and Applied Mathematics. <span class="status">(Soumise)</span></li>
-<li>Atlas, A., <strong>Attmani, J.</strong>, Karami, F., Meskine, D.. <em>Convergence Analysis of a Finite Volume Scheme for a Non-Variational Model in Image Denoising</em>. ESAIM: Mathematical Modelling and Numerical Analysis. <span class="status">(Soumise)</span></li>
-<li>Atlas, A., <strong>Attmani, J.</strong>, Bendaida, F., Karami, F.. <em>A Novel Dynamic Threshold Model for Image Restoration</em>. Springer (Birkhäuser, Trends in Mathematics). <span class="status">(Acceptée)</span></li>
+  <li>Atlas, A., <strong>Attmani, J.</strong>, Bekkari, A., Erraji, E.. <em>A Nonlinear Fractional Parabolic System with Variable Exponents for Image Denoising</em>. Computational and Applied Mathematics. <span class="status-soumis">Soumise</span></li>
+<li>Atlas, A., <strong>Attmani, J.</strong>, Karami, F., Meskine, D.. <em>Convergence Analysis of a Finite Volume Scheme for a Non-Variational Model in Image Denoising</em>. ESAIM: Mathematical Modelling and Numerical Analysis. <span class="status-soumis">Soumise</span></li>
+<li>Atlas, A., <strong>Attmani, J.</strong>, Bendaida, F., Karami, F.. <em>A Novel Dynamic Threshold Model for Image Restoration</em>. Springer (Birkhäuser, Trends in Mathematics). <span class="status-accept">Acceptée</span></li>
   </ul>
 
   <h2 id="agregation">Tirages des oraux de l'agrégation (2024)</h2>
   <ul>
-  <li><a href="https://agreg-maths.fr/lecons/1096" target="_blank" rel="noopener">Algèbre et Géométrie : Barycentres dans un espace affine réel de dimension finie, convexité. Applications.</a></li>
-<li><a href="https://agreg-maths.fr/lecons/928" target="_blank" rel="noopener">Analyse et Probabilités : Continuité et dérivabilité des fonctions réelles d'une variable réelle</a></li>
-<li><a href="mod.pdf" target="_blank" rel="noopener">Textes de modélisation : Position optimale d'une charge suspendue</a></li>
+  <li><a href="https://agreg-maths.fr/lecons/1096" target="_blank" rel="noopener"><span class="domaine">Algèbre et Géométrie</span> Barycentres dans un espace affine réel de dimension finie, convexité. Applications.</a></li>
+<li><a href="https://agreg-maths.fr/lecons/928" target="_blank" rel="noopener"><span class="domaine">Analyse et Probabilités</span> Continuité et dérivabilité des fonctions réelles d'une variable réelle</a></li>
+<li><a href="mod.pdf" target="_blank" rel="noopener"><span class="domaine">Textes de modélisation</span> Position optimale d'une charge suspendue</a></li>
   </ul>
 
   <h2 id="contact">Contact</h2>
   <p><strong>Email :</strong> <a href="mailto:mr.jamal.attmani@gmail.com">mr.jamal.attmani@gmail.com</a></p>
-<p><strong>Google Scholar :</strong> <a href="https://scholar.google.com/citations?user=7ha3FgkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">https://scholar.google.com/citations?user=7ha3FgkAAAAJ&amp;hl=en&amp;oi=ao</a></p>
-<p><strong>ResearchGate :</strong> <a href="https://www.researchgate.net/profile/Jamal-Attmani-2" target="_blank" rel="noopener">https://www.researchgate.net/profile/Jamal-Attmani-2</a></p>
-<p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/jamal-attmani/" target="_blank" rel="noopener">https://www.linkedin.com/in/jamal-attmani/</a></p>
+<p><a href="https://scholar.google.com/citations?user=7ha3FgkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a> · <a href="https://www.researchgate.net/profile/Jamal-Attmani-2" target="_blank" rel="noopener">ResearchGate</a> · <a href="https://www.linkedin.com/in/jamal-attmani/" target="_blank" rel="noopener">LinkedIn</a></p>
 
   <footer>
     © 2026 Jamal Attmani
