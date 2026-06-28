@@ -102,6 +102,15 @@
     padding:5px 10px;border-radius:5px;display:inline-block;
   }
   nav a:hover{background:var(--blue-soft);}
+  .cv-link{
+    display:inline-flex;align-items:center;gap:5px;
+    background:var(--navy);color:#fff;font-weight:bold;
+  }
+  .cv-link:hover{background:var(--blue);}
+  .ic-dl{
+    width:13px;height:13px;flex-shrink:0;
+    fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  }
 
   /* publications */
   .pub-list{list-style:none;padding-left:0;}
@@ -147,6 +156,10 @@
       <a href="#communications">Communications orales</a>
       <a href="#agregation">Agrégation</a>
       <a href="#contact">Contact</a>
+      <a href="CV_Jamal_Attmani.pdf" download class="cv-link">
+        <svg class="ic-dl" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>
+        CV
+      </a>
     </nav>
   </header>
 
