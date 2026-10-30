@@ -1,262 +1,370 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jamal Attmani — Mathématiques Appliquées</title>
-<meta name="description" content="Jamal Attmani, Docteur en Mathématiques Appliquées et Informatique, Professeur Agrégé. Enseignement, recherche, publications.">
-<style>
-  :root{
-    --bg:#fbfbfa;
-    --text:#23262b;
-    --muted:#6b6f76;
-    --navy:#173b5e;
-    --blue:#0b4f87;
-    --blue-soft:#e6eef5;
-    --amber:#9a4f12;
-    --amber-soft:#f6e9da;
-    --green:#176b4d;
-    --green-soft:#e1f0e8;
-    --line:#dddedb;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f7">
+  <meta name="description" content="Site académique de Jamal Attmani, docteur en mathématiques appliquées et informatique et professeur agrégé. EDP, analyse numérique, optimisation, traitement d'images, enseignement et publications.">
+  <meta name="author" content="Jamal Attmani">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Jamal Attmani — Mathématiques appliquées & recherche">
+  <meta property="og:description" content="Recherche, publications scientifiques, enseignement et ressources pédagogiques.">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://jamalattmani.github.io/">
+  <link rel="canonical" href="https://jamalattmani.github.io/">
+  <title>Jamal Attmani | Recherche, publications et enseignement</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f7;
+      --surface: #ffffff;
+      --surface-soft: #f0f4f3;
+      --surface-accent: #e9f2f2;
+      --text: #1e2a35;
+      --heading: #102a42;
+      --muted: #60707c;
+      --accent: #007b82;
+      --accent-hover: #00646c;
+      --line: #dce4e7;
+      --shadow: 0 14px 42px -30px rgba(13,38,60,.30);
+      --radius: 18px;
+      --container: 1120px;
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0c1621; --surface: #122230; --surface-soft: #192b38;
+      --surface-accent: #173b42; --text: #e5edf1; --heading: #f3f7f8;
+      --muted: #a4b5bf; --accent: #66d3d3; --accent-hover: #9ee2df;
+      --line: #304452; --shadow: 0 14px 42px -30px rgba(0,0,0,.8);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.72 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; }
+    img { display: block; max-width: 100%; }
+    a { color: var(--accent); text-underline-offset: .22em; }
+    a:hover { color: var(--accent-hover); }
+    button { font: inherit; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+    h1,h2,h3,h4,p { margin-top: 0; }
+    h1,h2,h3 { color: var(--heading); letter-spacing: -.035em; line-height: 1.25; }
+    p { margin-bottom: 1em; }
+    .container { width: min(calc(100% - 48px), var(--container)); margin-inline: auto; }
+    .sr-only { position: absolute!important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .skip-link { position: absolute; inset: -100px auto auto 12px; z-index: 200; background: var(--surface); padding: 10px 16px; }
+    .skip-link:focus { top: 10px; }
+    .topbar { position: sticky; z-index: 100; top: 0; border-bottom: 1px solid var(--line); background: var(--surface); background: color-mix(in srgb, var(--surface) 93%, transparent); backdrop-filter: blur(12px); }
+    .nav-inner { min-height: 74px; display: flex; align-items: center; gap: 24px; }
+    .brand { color: var(--heading); font-weight: 800; letter-spacing: -.035em; font-size: 1.06rem; white-space: nowrap; text-decoration: none; }
+    .brand-mark { color: var(--accent); font-weight: 900; }
+    .nav-links { display: flex; gap: 4px; align-items: center; margin-left: auto; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: .88rem; font-weight: 600; padding: 8px 10px; border-radius: 8px; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a[aria-current="true"] { background: var(--surface-soft); color: var(--heading); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-btn { border: 1px solid var(--line); background: var(--surface); color: var(--heading); width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: grid; place-items: center; }
+    .icon-btn:hover { background: var(--surface-soft); }
+    .icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; text-decoration: none; font-size: .9rem; font-weight: 700; padding: 11px 16px; border-radius: 10px; border: 1px solid var(--line); color: var(--heading); background: var(--surface); transition: transform .18s, background .18s; }
+    .button:hover { transform: translateY(-2px); color: var(--heading); background: var(--surface-soft); }
+    .button.primary { background: var(--heading); color: var(--surface); border-color: var(--heading); }
+    .button.primary:hover { color: var(--surface); background: var(--accent-hover); border-color: var(--accent-hover); }
+    .button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .hero { padding-block: 72px 44px; display: grid; grid-template-columns: minmax(0,1fr) 290px; align-items: center; column-gap: clamp(32px,6vw,94px); }
+    .eyebrow { text-transform: uppercase; color: var(--accent); font-size: .75rem; letter-spacing: .16em; font-weight: 800; margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(2.45rem,5vw,4.25rem); margin-bottom: 12px; }
+    .hero .subtitle { font-size: clamp(1.03rem,1.65vw,1.22rem); font-weight: 650; color: var(--heading); line-height: 1.48; margin-bottom: 14px; }
+    .hero .lead { color: var(--muted); font-size: 1rem; max-width: 700px; margin-bottom: 26px; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-photo-wrap { position: relative; max-width: 290px; isolation: isolate; }
+    .hero-photo-wrap::before { content: ""; position: absolute; inset: 14px -14px -14px 14px; background: var(--surface-accent); border-radius: 22px; z-index: -1; }
+    .hero-photo { width: 290px; height: 340px; object-fit: cover; object-position: center 18%; border: 6px solid var(--surface); border-radius: 20px; box-shadow: var(--shadow); }
+    .stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-top: 4px; margin-bottom: 38px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 15px 19px; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+    .stat .num { font-size: 1.35rem; color: var(--heading); font-weight: 800; line-height: 1.2; }
+    .stat .desc { font-size: .82rem; color: var(--muted); margin-top: 5px; }
+    .section { padding-block: 52px 16px; }
+    .section-heading { margin-bottom: 23px; }
+    .section-heading .kicker { color: var(--accent); text-transform: uppercase; font-size: .75rem; font-weight: 800; letter-spacing: .13em; margin-bottom: 6px; }
+    .section-heading h2 { font-size: clamp(1.6rem,2.8vw,2.1rem); margin: 0; }
+    .section-intro { max-width: 770px; color: var(--muted); margin-top: 12px; }
+    .two-col { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 24px; }
+    .surface { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 25px 27px; box-shadow: var(--shadow); }
+    .surface h3 { font-size: 1.09rem; margin-bottom: 10px; }
+    .surface p:last-child { margin-bottom: 0; }
+    .metadata-list { display: grid; gap: 15px; margin: 0; }
+    .metadata-list div { display: grid; gap: 2px; }
+    .metadata-list dt { font-size: .79rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .035em; }
+    .metadata-list dd { margin: 0; font-weight: 550; }
+    .timeline { list-style: none; padding: 0; margin: 4px 0 0; border-left: 2px solid var(--line); }
+    .timeline li { position: relative; padding: 0 0 19px 20px; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before { content: ""; width: 10px; height: 10px; background: var(--accent); border: 2px solid var(--surface); border-radius: 50%; position: absolute; left: -6px; top: 6px; }
+    .timeline .when { font-size: .8rem; color: var(--accent); font-weight: 800; }
+    .timeline strong { display: block; color: var(--heading); }
+    .timeline .where { font-size: .87rem; color: var(--muted); }
+    .research-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .research-card { padding: 23px 25px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .research-card h3 { margin-bottom: 9px; font-size: 1.08rem; }
+    .research-card p { color: var(--muted); margin: 0; font-size: .94rem; }
+    .research-num { color: var(--accent); font-size: .75rem; font-weight: 900; display: block; margin-bottom: 10px; }
+    .section-split { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin: 28px 0 12px; }
+    .section-split h3 { font-size: 1.25rem; margin: 0; }
+    .section-split span { font-size: .82rem; color: var(--muted); }
+    .publication-list { display: grid; gap: 11px; padding: 0; margin: 0; list-style: none; }
+    .publication { display: grid; grid-template-columns: 56px minmax(0,1fr); align-items: start; gap: 15px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 17px 19px; }
+    .publication .pub-year { color: var(--accent); font-size: .82rem; font-weight: 850; padding-top: 2px; }
+    .pub-title { font-size: 1rem; color: var(--heading); font-weight: 750; line-height: 1.42; margin: 0 0 5px; }
+    .pub-authors, .pub-source { font-size: .87rem; color: var(--muted); margin: 0 0 3px; line-height: 1.65; }
+    .pub-source em { color: var(--text); }
+    .pub-details { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 8px; font-size: .82rem; }
+    .quartile { color: var(--muted); font-weight: 650; }
+    .quartile b { color: var(--heading); }
+    .pub-details a { font-weight: 650; }
+    .note { font-size: .82rem; color: var(--muted); margin-top: 12px; }
+    .teaching-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .course { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow); }
+    .course .period { color: var(--accent); font-size: .76rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 750; }
+    .course h3 { font-size: 1.2rem; margin: 5px 0 7px; }
+    .course .course-meta { color: var(--muted); font-size: .88rem; }
+    .course h4 { margin: 17px 0 8px; font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    .resource-list { display: flex; gap: 7px; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; }
+    .resource-link, .resource-off { display: inline-flex; align-items: center; padding: 6px 10px; font-size: .82rem; border-radius: 7px; font-weight: 650; text-decoration: none; }
+    .resource-link { color: var(--accent); background: var(--surface-accent); border: 1px solid transparent; }
+    .resource-link:hover { color: var(--accent-hover); border-color: var(--accent); }
+    .resource-off { color: var(--muted); border: 1px dashed var(--line); font-weight: 500; cursor: default; }
+    .teaching-note { color: var(--muted); font-size: .91rem; margin: 18px 0 0; }
+    .talk-list { display: grid; gap: 0; list-style: none; margin: 0; padding: 0; }
+    .talk-list li { padding: 15px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 146px minmax(0,1fr); gap: 19px; }
+    .talk-list li:last-child { border-bottom: 0; }
+    .talk-list .talk-meta { color: var(--accent); font-weight: 800; font-size: .85rem; }
+    .talk-list strong { color: var(--heading); }
+    .talk-list .details { color: var(--muted); font-size: .88rem; }
+    .agreg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .agreg-grid ul { padding-left: 19px; margin: 0; }
+    .agreg-grid li { margin: 7px 0; }
+    .contact { background: #102a42; color: #e7f0f2; border-radius: 20px; padding: 30px 34px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .contact h2 { color: #fff; font-size: 1.75rem; margin: 0 0 7px; }
+    .contact p { color: #d8e7ed; margin: 0; }
+    .contact .button { background: white; color: #102a42; white-space: nowrap; border-color: white; }
+    .contact .button:hover { color: #102a42; background: #e8f5f5; }
+    .socials { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 16px; }
+    .socials a { font-weight: 650; font-size: .9rem; }
+    .footer { border-top: 1px solid var(--line); margin-top: 65px; padding: 25px 0 38px; color: var(--muted); font-size: .83rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer a { font-weight: 650; }
+    @media (max-width: 1030px) {
+      .nav-inner { flex-wrap: wrap; padding-block: 12px; gap: 5px 15px; }
+      .nav-links { order: 3; width: 100%; margin: 0; padding: 0 0 4px; overflow-x: auto; scrollbar-width: thin; }
+      .nav-actions { margin-left: auto; }
+      html { scroll-padding-top: 140px; }
+    }
+    @media (max-width: 740px) {
+      .hero { grid-template-columns: 1fr 190px; gap: 20px; padding-block: 47px 34px; }
+      .hero-photo { width: 190px; height: 245px; }
+      .two-col, .research-grid, .teaching-grid, .agreg-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(3,1fr); }
+      .stat { padding: 14px; }
+      .section { padding-block: 37px 8px; }
+      .contact { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 540px) {
+      .container { width: min(calc(100% - 34px),var(--container)); }
+      .hero { grid-template-columns: 1fr; }
+      .hero-photo-wrap { grid-row: 1; max-width: 135px; }
+      .hero-photo { width: 135px; height: 150px; border-width: 4px; }
+      .hero-photo-wrap::before { inset: 7px -8px -8px 8px; border-radius: 16px; }
+      .hero h1 { font-size: 2.55rem; }
+      .stats { grid-template-columns: 1fr; gap: 8px; }
+      .stat { flex-direction: row; align-items: center; gap: 13px; }
+      .stat .num { min-width: 34px; }
+      .stat .desc { margin: 0; }
+      .surface, .course { padding: 20px; }
+      .publication { grid-template-columns: 1fr; gap: 2px; padding: 16px; }
+      .talk-list li { grid-template-columns: 1fr; gap: 3px; }
+      .contact { padding: 25px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+    @media print { .topbar,.hero-cta,.footer,.contact .button,.theme-button { display:none!important; } .container { width:100%; } .section { break-inside:avoid; } body { font-size:12px; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jamal Attmani",
+    "url": "https://jamalattmani.github.io/",
+    "jobTitle": "Professeur agrégé de mathématiques",
+    "email": "mailto:j.attmani.ced@uca.ac.ma",
+    "alumniOf": [{"@type":"CollegeOrUniversity","name":"Université Cadi Ayyad"}],
+    "knowsAbout": ["Applied mathematics", "Partial differential equations", "Fractional operators", "Numerical analysis", "Optimal control", "Image restoration"],
+    "sameAs": ["https://orcid.org/0009-0001-1766-8651", "https://scholar.google.com/citations?user=7ha3FgkAAAAJ", "https://www.researchgate.net/profile/Jamal-Attmani-2", "https://www.linkedin.com/in/jamal-attmani/"]
   }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:Georgia, 'Times New Roman', serif;
-    line-height:1.7;
-    font-size:17px;
-    border-top:5px solid var(--blue);
-  }
-  .wrap{max-width:1180px;margin:0 auto;padding:48px 40px 80px;}
-  img{max-width:100%;}
-  a{color:var(--blue);text-decoration:underline;text-decoration-color:#0b4f8755;}
-  a:hover{text-decoration-color:var(--blue);}
-  h1,h2,h3{font-weight:normal;}
-  h1{font-size:1.9rem;margin:0 0 4px;color:var(--navy);}
-  h2{
-    font-size:1.3rem;margin:48px 0 16px;padding-bottom:8px;
-    color:var(--navy);border-bottom:2px solid var(--blue);
-  }
-  h3{font-size:1.1rem;margin:28px 0 4px;color:var(--amber);}
-  h2:first-of-type{margin-top:0;}
-  p{margin:0 0 12px;}
-  .role{color:var(--muted);font-style:italic;margin:0 0 18px;}
-  .tag{
-    display:inline-block;font-size:.8rem;color:var(--blue);background:var(--blue-soft);
-    padding:2px 9px;border-radius:4px;margin:0 0 10px;
-  }
-  .label{font-weight:bold;margin:14px 0 4px;font-size:.95rem;color:var(--text);}
-  ul{margin:4px 0 4px;padding-left:22px;}
-  li{margin-bottom:4px;}
-  li.muted{color:var(--muted);}
-  li.muted em{font-style:italic;font-size:.9em;}
-  hr{border:none;border-top:1px solid var(--line);margin:24px 0;}
-  .domaine{
-    color:var(--green);font-weight:bold;
-  }
-
-  /* enseignement: card grid + pill links */
-  .course-grid{
-    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:18px;
-  }
-  .course-card{
-    background:#fff;border:1px solid var(--line);border-radius:10px;
-    padding:22px 22px 20px;
-    box-shadow:0 1px 2px rgba(20,30,40,.04), 0 8px 18px -12px rgba(20,30,40,.14);
-  }
-  .course-card h3{margin-top:0;}
-  .course-tag{
-    font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);margin:0 0 6px;
-  }
-  .course-group{margin-top:14px;}
-  .course-group h4{
-    font-size:.85rem;font-weight:bold;color:var(--muted);margin:0 0 8px;
-    text-transform:uppercase;letter-spacing:.02em;
-  }
-  .file-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
-  .file-pill{
-    display:inline-flex;align-items:center;gap:6px;background:var(--blue-soft);color:var(--blue);
-    text-decoration:none;font-size:.85rem;padding:6px 12px 6px 9px;border-radius:999px;
-    border:1px solid transparent;
-  }
-  .file-pill:hover{background:#cfe1ef;border-color:var(--blue);}
-  .file-pill--off{background:#eef0ef;color:var(--muted);}
-  .file-pill--off em{font-style:normal;font-size:.72rem;margin-left:3px;opacity:.85;}
-  .ic-doc{
-    width:14px;height:14px;flex-shrink:0;
-    fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;
-  }
-
-  /* header / nav */
-  header{margin-bottom:36px;}
-  .header-row{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
-  .photo{
-    width:140px;height:175px;object-fit:cover;border:1px solid var(--line);flex-shrink:0;
-  }
-  .intro{flex:1;min-width:240px;}
-  nav{margin-top:18px;font-size:.95rem;}
-  nav a{
-    margin-right:6px;text-decoration:none;color:var(--blue);
-    padding:5px 10px;border-radius:5px;display:inline-block;
-  }
-  nav a:hover{background:var(--blue-soft);}
-  .cv-link{
-    display:inline-flex;align-items:center;gap:5px;
-    background:var(--navy);color:#fff;font-weight:bold;
-  }
-  .cv-link:hover{background:var(--blue);}
-  .ic-dl{
-    width:13px;height:13px;flex-shrink:0;
-    fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-  }
-
-  /* publications */
-  .pub-list{list-style:none;padding-left:0;}
-  .pub-list li{margin-bottom:14px;}
-  .year{color:var(--blue);font-weight:bold;}
-  .status-soumis,.status-accept{
-    display:inline-block;font-size:.8rem;font-style:normal;padding:1px 8px;border-radius:4px;
-  }
-  .status-soumis{background:var(--amber-soft);color:var(--amber);}
-  .status-accept{background:var(--green-soft);color:var(--green);}
-
-  footer{
-    margin-top:56px;padding-top:16px;border-top:1px solid var(--line);
-    color:var(--muted);font-size:.85rem;
-  }
-
-  @media (max-width:760px){
-    .course-grid{grid-template-columns:1fr;}
-  }
-  @media (max-width:560px){
-    .header-row{flex-direction:column;}
-    .photo{width:120px;height:150px;}
-    nav a{padding:5px 8px;}
-  }
-</style>
+  </script>
 </head>
 <body>
-<div class="wrap">
-
-  <header>
-    <div class="header-row">
-      <img class="photo" src="photo_jamal.jpeg" alt="Photo de Jamal Attmani">
-      <div class="intro">
-        <h1>Jamal Attmani</h1>
-        <p class="role">Docteur en Mathématiques Appliquées et Informatique — Professeur Agrégé de Mathématiques</p>
-        <p>Ce site présente mes activités d'enseignement, mes axes de recherche ainsi que mes publications scientifiques.</p>
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+  <header class="topbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#accueil" aria-label="Jamal Attmani, accueil"><span class="brand-mark">J.</span> Attmani</a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#parcours">Parcours</a>
+        <a href="#recherche">Recherche</a>
+        <a href="#publications">Publications</a>
+        <a href="#communications">Communications</a>
+        <a href="#enseignement">Enseignement</a>
+        <a href="#agregation">Agrégation</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn theme-button" type="button" id="theme-toggle" aria-label="Activer le mode sombre" title="Changer le thème">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5a8.5 8.5 0 1 0 10.8 10.8Z"/></svg>
+        </button>
       </div>
     </div>
-    <nav>
-      <a href="#enseignement">Enseignement</a>
-      <a href="#recherche">Recherche</a>
-      <a href="#publications">Publications</a>
-      <a href="#communications">Communications orales</a>
-      <a href="#agregation">Agrégation</a>
-      <a href="#contact">Contact</a>
-      <a href="CV_Jamal_ATTMANI.pdf" download class="cv-link">
-        <svg class="ic-dl" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>
-        CV
-      </a>
-    </nav>
   </header>
+  <main id="contenu">
+    <div class="container">
+      <section class="hero" id="accueil" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Enseignement supérieur · Recherche</p>
+          <h1 id="page-title">Jamal Attmani</h1>
+          <p class="subtitle">Docteur en mathématiques appliquées et informatique<br>Professeur agrégé de mathématiques</p>
+          <p class="lead">Mes travaux portent sur l'analyse des équations aux dérivées partielles non linéaires et fractionnaires, l'optimisation et le calcul scientifique, avec des applications à la restauration d'images et à la vision par ordinateur.</p>
+          <div class="hero-cta">
+            <a class="button primary" href="CV_Jamal_ATTMANI_FR.pdf" download>CV en français <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 20h14"/></svg></a>
+            <a class="button" href="CV_Jamal_ATTMANI_EN.pdf" download>Academic CV (EN) <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 20h14"/></svg></a>
+            <a class="button" href="mailto:j.attmani.ced@uca.ac.ma">Me contacter</a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap"><img class="hero-photo" src="photo_jamal.jpeg" alt="Portrait de Jamal Attmani" width="290" height="340" fetchpriority="high"></div>
+      </section>
+      <div class="stats" aria-label="Activités scientifiques en chiffres">
+        <div class="stat"><span class="num">2026</span><span class="desc">Doctorat soutenu le 4 avril</span></div>
+        <div class="stat"><span class="num">5</span><span class="desc">Articles publiés en revue</span></div>
+        <div class="stat"><span class="num">7</span><span class="desc">Communications scientifiques</span></div>
+      </div>
 
-  <h2 id="enseignement">Enseignement</h2>
-  <div class="course-grid">
-  <article class="course-card"><p class="course-tag">Semestre 1 — 1ʳᵉ année du Cycle préparatoire</p><h3>Analyse 1</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 : Analyse 1</span></a></li><li><a class="file-pill" href="td2_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 : Analyse 1</span></a></li><li><a class="file-pill" href="td3_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 : Analyse 1</span></a></li></ul></div><div class="course-group"><h4>Contrôles</h4><ul class="file-list"><li><a class="file-pill" href="controle1_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle 1</span></a></li><li><a class="file-pill" href="controle2_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle 2</span></a></li><li><a class="file-pill" href="rattrapage_analyse1.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>Contrôle de rattrapage</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 2 — 1ʳᵉ année du Cycle préparatoire</p><h3>Analyse 2</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_analyse2.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 : Analyse 2</span></a></li><li><a class="file-pill" href="td2_analyse2.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 : Analyse 2</span></a></li><li><a class="file-pill" href="td3_analyse2.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 : Analyse 2</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 2 — 1ʳᵉ année du Cycle préparatoire</p><h3>Algèbre linéaire</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><a class="file-pill" href="td1_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 1 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td2_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 2 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td3_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 3 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td4_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 4 : Algèbre linéaire</span></a></li><li><a class="file-pill" href="td5_algebre.pdf" target="_blank" rel="noopener"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 12h7M8.5 15h7M8.5 18h4"/></svg><span>TD 5 : Algèbre linéaire</span></a></li></ul></div></article><article class="course-card"><p class="course-tag">Semestre 4 — 2ᵉ année du Cycle préparatoire</p><h3>Analyse 4</h3><div class="course-group"><h4>Travaux dirigés</h4><ul class="file-list"><li><span class="file-pill file-pill--off" aria-disabled="true"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 1 : Analyse 4</li><li><span class="file-pill file-pill--off" aria-disabled="true"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 2 : Analyse 4</li><li><span class="file-pill file-pill--off" aria-disabled="true"><svg class="ic-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19"/><path d="M8.5 14h7M8.5 17h4"/></svg><span>TD 3 : Analyse 4</li></ul></div></article>
-  </div>
+      <section class="section" id="parcours" aria-labelledby="parcours-title">
+        <div class="section-heading"><p class="kicker">01 / Profil académique</p><h2 id="parcours-title">Parcours et formation</h2></div>
+        <div class="two-col">
+          <div class="surface">
+            <h3>Doctorat et projet scientifique</h3>
+            <p>Docteur de l'Université Cadi Ayyad (Faculté des sciences Semlalia, Marrakech), mes recherches se situent à l'interface de l'analyse mathématique, de la modélisation, de l'optimisation sous contraintes EDP et du traitement d'images.</p>
+            <dl class="metadata-list">
+              <div><dt>Sujet de thèse</dt><dd><em>Fractional and Nonlinear PDE-Constrained Models for Image Restoration: A Mathematical and Numerical Study</em></dd></div>
+              <div><dt>Soutenance</dt><dd>4 avril 2026 — Très honorable avec félicitations du jury</dd></div>
+              <div><dt>Direction scientifique</dt><dd>Abdelghafour Atlas · Fahd Karami (co-encadrant)</dd></div>
+            </dl>
+          </div>
+          <div class="surface">
+            <h3>Diplômes et qualifications</h3>
+            <ol class="timeline">
+              <li><span class="when">2020–2026</span><strong>Doctorat en mathématiques appliquées et informatique</strong><span class="where">Université Cadi Ayyad, Marrakech</span></li>
+              <li><span class="when">2024</span><strong>Agrégation externe de mathématiques</strong><span class="where">Rabat</span></li>
+              <li><span class="when">2022–2024</span><strong>Agrégation interne de mathématiques</strong><span class="where">CRMEF, Marrakech</span></li>
+              <li><span class="when">2017–2019</span><strong>Master en mathématiques et applications au calcul scientifique</strong><span class="where">Université Sidi Mohamed Ben Abdellah, Fès</span></li>
+              <li><span class="when">2016–2017</span><strong>Licence en sciences mathématiques et applications</strong><span class="where">Université Cadi Ayyad, Marrakech</span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
 
-  <h2 id="recherche">Domaines de recherche</h2>
-  <ul>
-  <li>Équations aux dérivées partielles (EDP) non linéaires et fractionnaires</li>
-<li>Restauration et débruitage d'images (image denoising / image restoration)</li>
-<li>Optimisation sous contraintes EDP et contrôle optimal</li>
-<li>Analyse numérique : schémas de volumes finis et d'éléments finis, étude de convergence</li>
-<li>Analyse non lisse et optimisation (nonsmooth analysis and optimization)</li>
-<li>Modélisation mathématique de systèmes complexes</li>
-<li>Intelligence artificielle et deep learning appliqués au traitement d'images (U-Net, vision par ordinateur)</li>
-<li>Calcul scientifique et programmation numérique (Python, Matlab, C/C++)</li>
-  </ul>
+      <section class="section" id="recherche" aria-labelledby="recherche-title">
+        <div class="section-heading"><p class="kicker">02 / Activités scientifiques</p><h2 id="recherche-title">Axes de recherche</h2><p class="section-intro">Des méthodes d'analyse et de calcul numérique aux applications en traitement d'images et en intelligence artificielle.</p></div>
+        <div class="research-grid">
+          <article class="research-card"><span class="research-num">01</span><h3>Équations aux dérivées partielles</h3><p>EDP non linéaires, systèmes paraboliques, opérateurs fractionnaires, espaces à exposants variables et analyse de la bonne position des modèles.</p></article>
+          <article class="research-card"><span class="research-num">02</span><h3>Analyse numérique</h3><p>Méthodes de volumes finis et d'éléments finis ; discrétisation, stabilité, convergence et simulation de systèmes évolutifs.</p></article>
+          <article class="research-card"><span class="research-num">03</span><h3>Optimisation et contrôle optimal</h3><p>Optimisation sous contraintes EDP, problèmes de contrôle, analyse non lisse et modèles variationnels ou non variationnels.</p></article>
+          <article class="research-card"><span class="research-num">04</span><h3>Restauration d'images et IA</h3><p>Débruitage, préservation des structures, reconstruction, apprentissage profond, U-Net et vision par ordinateur.</p></article>
+        </div>
+        <div class="surface" style="margin-top:16px">
+          <h3>Compétences et outils scientifiques</h3>
+          <p><strong>Programmation et calcul :</strong> Python, MATLAB, C/C++, R, Maple, CPLEX. <strong>Rédaction scientifique :</strong> LaTeX. <strong>Langues :</strong> français, arabe, anglais et tamazight (langue maternelle).</p>
+        </div>
+      </section>
 
-  <h2 id="publications">Publications</h2>
+      <section class="section" id="publications" aria-labelledby="publications-title">
+        <div class="section-heading"><p class="kicker">03 / Production scientifique</p><h2 id="publications-title">Publications</h2><p class="section-intro">Articles évalués par les pairs, contributions à des ouvrages collectifs et manuscrits soumis.</p></div>
+        <div class="section-split"><h3>Articles publiés dans des revues</h3><span>5 articles · ordre antéchronologique</span></div>
+        <ol class="publication-list">
+          <li class="publication"><span class="pub-year">2026</span><div><h4 class="pub-title">A new PDE-Constrained optimization applied to image denoising</h4><p class="pub-authors">Z. Ankhili, <strong>J. Attmani</strong>, F. Karami, D. Meskine</p><p class="pub-source"><em>Evolution Equations and Control Theory</em>, 21, 131–154.</p><div class="pub-details"><a href="https://doi.org/10.3934/eect.2026037" target="_blank" rel="noopener noreferrer">DOI / Article ↗</a><span class="quartile"><b>Q1</b> · SJR 2025* · Contrôle et optimisation</span></div></div></li>
+          <li class="publication"><span class="pub-year">2026</span><div><h4 class="pub-title">Enhancing crack detection and severity assessment in historical Tabiya basins using U-Net and adaptive thresholding</h4><p class="pub-authors">H. Matich, <strong>J. Attmani</strong>, H. Mousannif</p><p class="pub-source"><em>Frontiers in Artificial Intelligence</em>, 9, 1741082.</p><div class="pub-details"><a href="https://doi.org/10.3389/frai.2026.1741082" target="_blank" rel="noopener noreferrer">DOI / Article ↗</a><span class="quartile"><b>Q1</b> · SJR 2025* · Intelligence artificielle</span></div></div></li>
+          <li class="publication"><span class="pub-year">2026</span><div><h4 class="pub-title">Fine-grained pixel-level crack mapping in earthen heritage structures</h4><p class="pub-authors">H. Matich, <strong>J. Attmani</strong>, H. Mousannif</p><p class="pub-source"><em>Scientific Reports</em>, 16, article 28444.</p><div class="pub-details"><a href="https://doi.org/10.1038/s41598-026-54443-x" target="_blank" rel="noopener noreferrer">DOI / Article ↗</a><span class="quartile"><b>Q1</b> · SJR 2025* · Multidisciplinaire</span></div></div></li>
+          <li class="publication"><span class="pub-year">2024</span><div><h4 class="pub-title">Optimal control problem with nonlinear fractional system constraint applied to image restoration</h4><p class="pub-authors">A. Atlas, <strong>J. Attmani</strong>, F. Karami, D. Meskine</p><p class="pub-source"><em>Mathematical Methods in the Applied Sciences</em>, 47(9), 7714–7741.</p><div class="pub-details"><a href="https://doi.org/10.1002/mma.9998" target="_blank" rel="noopener noreferrer">DOI / Article ↗</a><span class="quartile"><b>Q2</b> · SJR 2024 · Mathématiques</span></div></div></li>
+          <li class="publication"><span class="pub-year">2022</span><div><h4 class="pub-title">Convergence of a finite volume scheme for a parabolic system applied to image processing</h4><p class="pub-authors"><strong>J. Attmani</strong>, A. Atlas, F. Karami</p><p class="pub-source"><em>Moroccan Journal of Pure and Applied Analysis</em>, 8(3), 401–437.</p><div class="pub-details"><a href="https://doi.org/10.2478/mjpaa-2022-0027" target="_blank" rel="noopener noreferrer">DOI / Article ↗</a><span class="quartile"><b>Q3</b> · SJR 2022 · Mathématiques</span></div></div></li>
+        </ol>
+        <p class="note">Quartiles SCImago (SJR) indiqués selon la catégorie scientifique retenue. * Pour les articles parus en 2026, le classement SJR disponible est celui de 2025 ; celui de 2026 n'est pas encore publié. Pour <em>Mathematical Methods in the Applied Sciences</em>, le classement 2024 est aussi Q1 en ingénierie.</p>
+        <div class="section-split"><h3>Chapitres d'ouvrages et actes de conférences</h3><span>2 contributions</span></div>
+        <ol class="publication-list">
+          <li class="publication"><span class="pub-year">2026</span><div><h4 class="pub-title">Nonlocal Image Denoising via Threshold-Based Diffusion and H<sup>−s</sup> Fidelity</h4><p class="pub-authors"><strong>J. Attmani</strong>, F. Bendaida, A. Bekkari</p><p class="pub-source"><em>Mathematics and Intelligent Systems in Industry</em>, Springer Proceedings in Mathematics &amp; Statistics, vol. 534.</p><div class="pub-details"><a href="https://doi.org/10.1007/978-3-032-17079-8_1" target="_blank" rel="noopener noreferrer">DOI / Chapitre ↗</a></div></div></li>
+          <li class="publication"><span class="pub-year">2026</span><div><h4 class="pub-title">A Novel Dynamic Threshold Model for Image Restoration</h4><p class="pub-authors">A. Atlas, <strong>J. Attmani</strong>, F. Bendaida, F. Karami</p><p class="pub-source"><em>Advances in Applied and Computational Mathematics</em>, Trends in Mathematics, Birkhäuser.</p><div class="pub-details"><a href="https://doi.org/10.1007/978-3-032-19398-8_1" target="_blank" rel="noopener noreferrer">DOI / Chapitre ↗</a></div></div></li>
+        </ol>
+        <div class="section-split"><h3>Manuscrits soumis</h3><span>En cours d'évaluation</span></div>
+        <ol class="publication-list">
+          <li class="publication"><span class="pub-year">Soumis</span><div><h4 class="pub-title">A Nonlinear Fractional Parabolic System with Variable Exponents for Image Denoising</h4><p class="pub-authors">A. Atlas, <strong>J. Attmani</strong>, A. Bekkari, E. Erraji</p><p class="pub-source">Manuscrit soumis à <em>Computational and Applied Mathematics</em>.</p></div></li>
+          <li class="publication"><span class="pub-year">Soumis</span><div><h4 class="pub-title">Convergence Analysis of a Finite Volume Scheme for a Non-Variational Model in Image Denoising</h4><p class="pub-authors">A. Atlas, <strong>J. Attmani</strong>, F. Karami, D. Meskine</p><p class="pub-source">Manuscrit soumis à <em>ESAIM: Mathematical Modelling and Numerical Analysis</em>.</p></div></li>
+        </ol>
+      </section>
 
-  <p class="label">Articles publiés</p>
-  <ul class="pub-list">
-  <li><span class="year">2026.</span> <strong>J. Attmani</strong>, F. Bendaida, A. Bekkari. <a href="https://link.springer.com/chapter/10.1007/978-3-032-17079-8_1" target="_blank" rel="noopener"><em>Nonlocal Image Denoising via Threshold-Based Diffusion and H−s Fidelity</em></a>. Mathematics and Intelligent Systems in Industry: MISI'25 Conference.</li>
-<li><span class="year">2026.</span> Z. Ankhili, <strong>J. Attmani</strong>, F. Karami, D. Meskine. <a href="https://www.aimsciences.org/article/doi/10.3934/eect.2026037" target="_blank" rel="noopener"><em>A new PDE-Constrained optimization applied to image denoising</em></a>. Evolution Equations and Control Theory, 21, 131-154.</li>
-<li><span class="year">2026.</span> H. Matich, <strong>J. Attmani</strong>, H. Mousannif. <a href="https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1741082/full" target="_blank" rel="noopener"><em>Enhancing crack detection and severity assessment in historical Tabiya basins using U-Net and adaptive thresholding</em></a>. Frontiers in Artificial Intelligence, 9, 1741082.</li>
-<li><span class="year">2024.</span> A. Atlas, <strong>J. Attmani</strong>, F. Karami, D. Meskine. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/mma.9998" target="_blank" rel="noopener"><em>Optimal control problem with nonlinear fractional system constraint applied to image restoration</em></a>. Mathematical Methods in the Applied Sciences, 47(9), 7714-7741.</li>
-<li><span class="year">2022.</span> <strong>J. Attmani</strong>, A. Atlas, F. Karami. <a href="https://reference-global.com/article/10.2478/mjpaa-2022-0027" target="_blank" rel="noopener"><em>Convergence of a finite volume scheme for a parabolic system applied to image processing</em></a>. Moroccan J. Pure Appl. Anal, 8, 401-437.</li>
-  </ul>
+      <section class="section" id="communications" aria-labelledby="communications-title">
+        <div class="section-heading"><p class="kicker">04 / Rayonnement scientifique</p><h2 id="communications-title">Communications scientifiques</h2></div>
+        <div class="surface">
+          <ol class="talk-list">
+            <li><div class="talk-meta">ICCDMS · 2025</div><div><strong><a href="Image_Restoration.pdf" target="_blank" rel="noopener">Image Restoration via Optimal Control of Nonlinear Fractional Systems</a></strong><div class="details">A. Atlas, J. Attmani, F. Karami, D. Meskine · 25–26 septembre · Essaouira</div></div></li>
+            <li><div class="talk-meta">IC2MAI · 2025</div><div><strong><a href="A_Novel_Model.pdf" target="_blank" rel="noopener">A Novel Model Based on a Nonlinear Fractional System for Image Restoration</a></strong><div class="details">J. Attmani, A. Atlas, F. Karami · 19 juin · Mohammedia</div></div></li>
+            <li><div class="talk-meta">ICRAMCS · 2025</div><div><strong><a href="A_Novel_Dynamic.pdf" target="_blank" rel="noopener">A Novel Dynamic Threshold Approach for Image Restoration</a></strong><div class="details">A. Atlas, J. Attmani, F. Karami · 24–26 avril · Marrakech</div></div></li>
+            <li><div class="talk-meta">MIMSC · 2024</div><div><strong><a href="Image_denoising.pdf" target="_blank" rel="noopener">Image denoising methods via PDE-Constrained optimization</a></strong><div class="details">A. Atlas, J. Attmani, F. Karami · 9–10 juillet · Essaouira</div></div></li>
+            <li><div class="talk-meta">ICRAMCS · 2024</div><div><strong><a href="Convergence_Analysis.pdf" target="_blank" rel="noopener">Convergence Analysis of a Finite Volume Scheme for a Parabolic System</a></strong><div class="details">J. Attmani, A. Atlas, F. Karami · 25–27 avril · Marrakech</div></div></li>
+            <li><div class="talk-meta">ICRAPDEA · 2023</div><div><strong><a href="Convergence_of_FV.pdf" target="_blank" rel="noopener">Convergence of FV Scheme for a Parabolic System in Image Processing</a></strong><div class="details">J. Attmani, A. Atlas, F. Karami · 27–28 juillet · Casablanca</div></div></li>
+            <li><div class="talk-meta">ICRAMCS · 2022</div><div><strong><a href="Convergence_of_a_Finite.pdf" target="_blank" rel="noopener">Convergence of a Finite Volume Scheme for a Parabolic System Applied to Image Processing</a></strong><div class="details">A. Atlas, J. Attmani, F. Karami, D. Meskine · 24–26 mars · Casablanca</div></div></li>
+          </ol>
+        </div>
+      </section>
 
-  <p class="label">Travaux soumis et acceptés</p>
-  <ul class="pub-list">
-  <li>Atlas, A., <strong>Attmani, J.</strong>, Bekkari, A., Erraji, E.. <em>A Nonlinear Fractional Parabolic System with Variable Exponents for Image Denoising</em>. Computational and Applied Mathematics. <span class="status-soumis">Soumise</span></li>
-<li>Atlas, A., <strong>Attmani, J.</strong>, Karami, F., Meskine, D.. <em>Convergence Analysis of a Finite Volume Scheme for a Non-Variational Model in Image Denoising</em>. ESAIM: Mathematical Modelling and Numerical Analysis. <span class="status-soumis">Soumise</span></li>
-<li>Atlas, A., <strong>Attmani, J.</strong>, Bendaida, F., Karami, F.. <em>A Novel Dynamic Threshold Model for Image Restoration</em>. Springer (Birkhäuser, Trends in Mathematics). <span class="status-accept">Acceptée</span></li>
-  </ul>
+      <section class="section" id="enseignement" aria-labelledby="enseignement-title">
+        <div class="section-heading"><p class="kicker">05 / Activités pédagogiques</p><h2 id="enseignement-title">Enseignement et ressources</h2><p class="section-intro">Cours, travaux dirigés et évaluations en cycle préparatoire d'écoles d'ingénieurs. Les liens ci-dessous conservent les noms de vos fichiers d'origine.</p></div>
+        <div class="teaching-grid">
+          <article class="course"><p class="period">ENSA Safi · 2024–2025 · 56 h</p><h3>Analyse 1</h3><p class="course-meta">1<sup>re</sup> année · Semestre 1 · Cours, TD et évaluations</p><h4>Travaux dirigés</h4><ul class="resource-list"><li><a class="resource-link" href="td1_analyse1.pdf" target="_blank" rel="noopener">TD 1 ↗</a></li><li><a class="resource-link" href="td2_analyse1.pdf" target="_blank" rel="noopener">TD 2 ↗</a></li><li><a class="resource-link" href="td3_analyse1.pdf" target="_blank" rel="noopener">TD 3 ↗</a></li></ul><h4>Évaluations</h4><ul class="resource-list"><li><a class="resource-link" href="controle1_analyse1.pdf" target="_blank" rel="noopener">Contrôle 1 ↗</a></li><li><a class="resource-link" href="controle2_analyse1.pdf" target="_blank" rel="noopener">Contrôle 2 ↗</a></li><li><a class="resource-link" href="rattrapage_analyse1.pdf" target="_blank" rel="noopener">Rattrapage ↗</a></li></ul></article>
+          <article class="course"><p class="period">ENSA Safi · 2020–2021 · 56 h</p><h3>Analyse 2</h3><p class="course-meta">1<sup>re</sup> année · Semestre 2 · Cours, TD et évaluations</p><h4>Travaux dirigés</h4><ul class="resource-list"><li><a class="resource-link" href="td1_analyse2.pdf" target="_blank" rel="noopener">TD 1 ↗</a></li><li><a class="resource-link" href="td2_analyse2.pdf" target="_blank" rel="noopener">TD 2 ↗</a></li><li><a class="resource-link" href="td3_analyse2.pdf" target="_blank" rel="noopener">TD 3 ↗</a></li></ul></article>
+          <article class="course"><p class="period">ENSA Safi · 2020–2021 · 28 h</p><h3>Algèbre linéaire</h3><p class="course-meta">1<sup>re</sup> année · Semestre 2 · Travaux dirigés</p><h4>Travaux dirigés</h4><ul class="resource-list"><li><a class="resource-link" href="td1_algebre.pdf" target="_blank" rel="noopener">TD 1 ↗</a></li><li><a class="resource-link" href="td2_algebre.pdf" target="_blank" rel="noopener">TD 2 ↗</a></li><li><a class="resource-link" href="td3_algebre.pdf" target="_blank" rel="noopener">TD 3 ↗</a></li><li><a class="resource-link" href="td4_algebre.pdf" target="_blank" rel="noopener">TD 4 ↗</a></li><li><a class="resource-link" href="td5_algebre.pdf" target="_blank" rel="noopener">TD 5 ↗</a></li></ul></article>
+          <article class="course"><p class="period">ENSA Safi · 2020–2021 · 56 h</p><h3>Analyse 4</h3><p class="course-meta">2<sup>e</sup> année · Semestre 4 · Cours, TD et évaluations</p><h4>Travaux dirigés</h4><ul class="resource-list"><li><span class="resource-off" title="Document non disponible">TD 1 · À venir</span></li><li><span class="resource-off" title="Document non disponible">TD 2 · À venir</span></li><li><span class="resource-off" title="Document non disponible">TD 3 · À venir</span></li></ul></article>
+        </div>
+        <p class="teaching-note"><strong>Accompagnement pédagogique (ENSA Marrakech, 2020–2026) :</strong> soutien en Analyse 3, Algèbre 3, Analyse 4, Probabilités et Analyse numérique, en 2<sup>e</sup> année du cycle préparatoire.</p>
+      </section>
 
-  <h2 id="communications">Communications orales</h2>
-  <ul class="pub-list">
-  <li><span class="year">ICCDMS 2025.</span> A. Atlas, <strong>J. Attmani</strong>, F. Karami, D. Meskine. <a href="Image_Restoration.pdf" target="_blank" rel="noopener"><em>Image Restoration via Optimal Control of Nonlinear Fractional Systems</em></a>. International Conference on Complex Dynamics, Modeling and Simulation, 25-26 septembre 2025, Essaouira.</li>
-<li><span class="year">IC2MAI 2025.</span> <strong>J. Attmani</strong>, A. Atlas, F. Karami. <a href="A_Novel_Model.pdf" target="_blank" rel="noopener"><em>A Novel Model Based on a Nonlinear Fractional System for Image Restoration</em></a>. 1ʳᵉ International Conference on Mathematical Modeling and Artificial Intelligence, 19 juin 2025, Mohammedia.</li>
-<li><span class="year">ICRAMCS 2025.</span> A. Atlas, <strong>J. Attmani</strong>, F. Karami. <a href="A_Novel_Dynamic.pdf" target="_blank" rel="noopener"><em>A Novel Dynamic Threshold Approach for Image Restoration</em></a>. 7ᵉ édition de l'International Conference on Research in Applied Mathematics and Computer Science, 24-26 avril 2025, Marrakech.</li>
-<li><span class="year">Workshop MIMSC 2024.</span> A. Atlas, <strong>J. Attmani</strong>, F. Karami. <a href="Image_denoising.pdf" target="_blank" rel="noopener"><em>Image denoising methods via PDE-Constrained optimization</em></a>. Workshop on Mathematics, Computer Science and Modelling of Complex Systems, 9-10 juillet 2024, Essaouira.</li>
-<li><span class="year">ICRAMCS 2024.</span> <strong>J. Attmani</strong>, A. Atlas, F. Karami. <a href="Convergence_Analysis.pdf" target="_blank" rel="noopener"><em>Convergence Analysis of a Finite Volume Scheme for a Parabolic System</em></a>. 6ᵉ édition de l'International Conference on Research in Applied Mathematics and Computer Science, 25-27 avril 2024, Marrakech.</li>
-<li><span class="year">ICRAPDEA 2023.</span> <strong>J. Attmani</strong>, A. Atlas, F. Karami. <a href="Convergence_of_FV.pdf" target="_blank" rel="noopener"><em>Convergence of FV Scheme for a Parabolic System in Image Processing</em></a>. International Conference on Recent Advances in Partial Differential Equations and Applications, 27-28 juillet 2023, Casablanca.</li>
-<li><span class="year">ICRAMCS 2022.</span> A. Atlas, <strong>J. Attmani</strong>, F. Karami, D. Meskine. <a href="Convergence_of_a_Finite.pdf" target="_blank" rel="noopener"><em>Convergence of a Finite Volume Scheme for a Parabolic System Applied to Image Processing</em></a>. 4ᵉ édition de l'International Conference on Research in Applied Mathematics and Computer Science, 24-26 mars 2022, Casablanca.</li>
-  </ul>
+      <section class="section" id="agregation" aria-labelledby="agregation-title">
+        <div class="section-heading"><p class="kicker">06 / Ressources complémentaires</p><h2 id="agregation-title">Agrégation de mathématiques · 2024</h2></div>
+        <div class="agreg-grid">
+          <div class="surface"><h3>Épreuves écrites</h3><ul><li><a href="mg24.pdf" target="_blank" rel="noopener">Mathématiques générales ↗</a></li><li><a href="ap24.pdf" target="_blank" rel="noopener">Analyse et probabilités ↗</a></li></ul></div>
+          <div class="surface"><h3>Épreuves orales</h3><ul><li><a href="https://agreg-maths.fr/lecons/1096" target="_blank" rel="noopener noreferrer">Algèbre et géométrie : barycentres, convexité ↗</a></li><li><a href="https://agreg-maths.fr/lecons/928" target="_blank" rel="noopener noreferrer">Analyse : continuité et dérivabilité ↗</a></li><li><a href="mod.pdf" target="_blank" rel="noopener">Modélisation : position optimale d'une charge suspendue ↗</a></li></ul></div>
+        </div>
+      </section>
 
-<h2 id="agregation">Agrégation de Mathématiques (2024)</h2>
-
-<h3>Épreuves écrites</h3>
-<ul>
-  <li>
-    <a href="mg24.pdf" target="_blank" rel="noopener">
-      <span class="domaine">Mathématiques générales</span>
-    </a>
-  </li>
-  <li>
-    <a href="ap24.pdf" target="_blank" rel="noopener">
-      <span class="domaine">Analyse et Probabilités</span>
-    </a>
-  </li>
-</ul>
-
-<h3>Épreuves orales</h3>
-<ul>
-  <li>
-    <a href="https://agreg-maths.fr/lecons/1096" target="_blank" rel="noopener">
-      <span class="domaine">Algèbre et Géométrie</span>
-      Barycentres dans un espace affine réel de dimension finie, convexité. Applications.
-    </a>
-  </li>
-
-  <li>
-    <a href="https://agreg-maths.fr/lecons/928" target="_blank" rel="noopener">
-      <span class="domaine">Analyse et Probabilités</span>
-      Continuité et dérivabilité des fonctions réelles d'une variable réelle.
-    </a>
-  </li>
-
-  <li>
-    <a href="mod.pdf" target="_blank" rel="noopener">
-      <span class="domaine">Texte de modélisation</span>
-      Position optimale d'une charge suspendue.
-    </a>
-  </li>
-</ul>
-
-  <h2 id="contact">Contact</h2>
-  <p><strong>Email :</strong> <a href="mailto:mr.jamal.attmani@gmail.com">mr.jamal.attmani@gmail.com</a></p>
-<p><a href="https://scholar.google.com/citations?user=7ha3FgkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a> · <a href="https://www.researchgate.net/profile/Jamal-Attmani-2" target="_blank" rel="noopener">ResearchGate</a> · <a href="https://www.linkedin.com/in/jamal-attmani/" target="_blank" rel="noopener">LinkedIn</a></p>
-
-  <footer>
-    © 2026 Jamal Attmani
-  </footer>
-
-</div>
+      <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="contact"><div><p class="eyebrow" style="color:#88dedc;margin-bottom:7px">07 / Contact</p><h2 id="contact-title">Échanger autour des mathématiques</h2><p>Recherche, enseignement, collaborations scientifiques et échanges universitaires.</p></div><a class="button" href="mailto:j.attmani.ced@uca.ac.ma">Écrire un e-mail ↗</a></div>
+        <div class="socials" aria-label="Profils académiques et professionnels"><a href="https://orcid.org/0009-0001-1766-8651" target="_blank" rel="noopener noreferrer">ORCID ↗</a><a href="https://scholar.google.com/citations?user=7ha3FgkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a><a href="https://www.researchgate.net/profile/Jamal-Attmani-2" target="_blank" rel="noopener noreferrer">ResearchGate ↗</a><a href="https://www.linkedin.com/in/jamal-attmani/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="mailto:mr.jamal.attmani@gmail.com">E-mail personnel ↗</a></div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span>© <span id="copyright-year">2026</span> Jamal Attmani · Marrakech, Maroc</span><a href="#accueil">Retour en haut ↑</a></div></footer>
+  <script>
+    (() => {
+      const themeButton = document.getElementById('theme-toggle');
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('jamal-theme'); } catch (_) { /* stockage facultatif */ }
+      if (savedTheme === 'dark' || savedTheme === 'light') document.documentElement.dataset.theme = savedTheme;
+      const updateLabel = () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        themeButton.setAttribute('aria-label', isDark ? 'Activer le mode clair' : 'Activer le mode sombre');
+        themeButton.setAttribute('aria-pressed', String(isDark));
+      };
+      updateLabel();
+      themeButton.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('jamal-theme', next); } catch (_) { /* stockage facultatif */ }
+        updateLabel();
+      });
+      document.getElementById('copyright-year').textContent = String(new Date().getFullYear());
+    })();
+  </script>
 </body>
 </html>
